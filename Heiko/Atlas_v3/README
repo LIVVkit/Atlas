@@ -1,0 +1,26 @@
+# README ISMIP6 Atlas scripts
+
+These scripts produce a standard set of plots of model output based on a configuration file. The scripts require a recent installation of NCL (www.ncl.ucar.edu/)
+
+
+# Main script, which calls ncl script atlas_fun.ncl
+./Atlas_ISMIP6_User.sh
+
+# Configuration file
+Atlas_defaults_initMIP-Greenland.txt
+
+# Format defaults_file:
+<exp> <var> <timestep> <colorpalette> <levelmode> <lmin> <lmax> <lstep> <levels>
+
+If <levelmode>=0 automatic levels will be used based on data 
+    <lmin> <lmax> <lstep> <levels> are ignored
+If <levelmode>=1 levels are in range [<lmin> .. <lmax>]
+   If <lstep> is non-zero, it is used as levels spacing 
+    <levels> is ignored
+If <levelmode>=2 explicit labels <levels> are used
+    <lmin> <lmax> <lstep> is ignored
+
+Example automatic: init lithk 0 "WhiteBlueGreenYellowRed" 0 0 0 0 "(/0/)"  
+Example manual: init topg 0 "GMT_wysiwyg" 1 -3000 3000 500 "(/0/)"  
+Example explicit: init orog 0 "GMT_relief" 2 0 0 0 "(/0,10,100,1000,10000/)"  
+

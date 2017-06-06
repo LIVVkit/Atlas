@@ -1,0 +1,71 @@
+Hi Joe,
+
+it was a bit of a trip for me to get back home. My flight from SF to
+Chicago was delayed so I missed my flight to Brussels. Next possibility
+was two days later, so I had to hang around in Chicago for two nights.
+Anyway, now I am back and I can send you my atlas package.
+
+Attached is the NCL version I was talking about and below an earlier
+memo trying to encapsulate what the tool should do.
+
+I have also added my shell scripts to check nc files. meta_check_2d.sh
+is just a template and would need to be fleshed out more, but
+meta_check_scalar.sh (calling nc_check_scalars.sh) is functional.
+
+Thanks for looking into that and please let me know if you need further
+input.
+
+Best greetings
+
+    Heiko
+
+
+    #########
+    Memo MIP analysis tool, Heiko Goelzer Nov 2016
+
+    Experience with the management of submitted ice sheet model results
+    during initMIP-Greenland has shown that a tool for quick checking if the
+    submissions is essential and ideally would already be applied at the
+    user side.
+
+    Therefore, it would be great to have a tool available that generates
+    plots of submitted data in a consistent way so that users and analysts
+    can get a quick overview of results and possibly compare different models.
+
+    The tool should run on a wide range of platforms to facilitate its use
+    in different setups and without dependencies on proprietary software.
+
+    At the core it should be capable to produce a comparable set of figures
+    that document the model results. It could offer other data visualisation
+    features, but should be straight forward to install and use (probably a
+    handful of scripts).
+
+    Since data is submitted in netcdf format and the MIPs typically require
+    standardisation of grids, variable names, units and attributes, it
+    should be possible to make a tool that can digest any submission (or
+    would complain if some requirements are not met). While the main layer
+    would visualise the data, the tool could have a separate layer to
+    explicitly check for technical aspects of the netcdf characteristics.
+    The tool should be flexible to deal with (and report) missing variables
+    and data.
+
+    In first instance the submitted variables themselves should be
+    visualised without modification, but it is also needed to be able to
+    process combinations of submitted data. The most obvious would be
+    masking to a certain region, e.g. the modelled ice mask, the observed
+    ice mask or a specific basin. In the latter two cases auxiliary data
+    would have to be provided on target grid(s). Other combinations of data
+    would be velocity magnitudes sqrt(vx^2+vy^2) or differences between
+    variables of two runs (e.g. asmb-ctrl). Difference to a reference (e.g.
+    the observed or results from a specific model) should be possible, again
+    this implies the need to specify auxiliary data.
+
+    # Predefined rule sets
+    My idea is that the tool allows specifying a rule set (preset or
+    configuration file) that defines the variables to plot, the colormap,
+    color mapping and range and the spacial and temporal range of the data.
+    These rule sets would be published by the MIP lead and allow for each
+    individual modelling group to get a set of comparable figures for their
+    data.
+
+    
