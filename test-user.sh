@@ -98,7 +98,7 @@ do
     if [ -e $afile ]; then
 	
 	# call ncl script passing shell variable (-Q supresses startup note)  
-	ncl -Q afile=\"${afile}\" aexp=\"${aexp}\" avar=\"${avar}\" atsp=${atsp} apal=${apal} amod=${amod} amin=${amin} amax=${amax} alsp=${alsp} alvl=${alvl} alabel=\"${alabel}\" atlas_fun.ncl
+	ncl -Q afile=\"${afile}\" aexp=\"${aexp}\" avar=\"${avar}\" atsp=${atsp} apal=${apal} amod=${amod} amin=${amin} amax=${amax} alsp=${alsp} alvl=${alvl} alabel=\"${alabel}\" Heiko/Atlas_v3/atlas_fun.ncl
     else
 	echo Warning: $avar file not present 
     fi

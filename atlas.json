@@ -1,7 +1,5 @@
 {
-    "DMI-PISM0" : {
-        "module" : "Atlas/atlas.py",
-        "description" : "Hello",
-        "directions" : "Put any declarations you need here."
+    "atlas" : {
+        "module" : "Atlas/atlas.py"
     }
 }
