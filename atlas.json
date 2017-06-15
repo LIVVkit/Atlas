@@ -1,5 +1,17 @@
 {
-    "atlas" : {
-        "module" : "Atlas/atlas.py"
+    "initMIP-GrIS" : {
+        "module" : "atlas.py",
+        "groups" : {
+            "ARC" : {
+                "models" : ["PISM5KM_CF"]
+            },
+            "BGC" : {
+                "models" : ["BISICLES1", "BISICLES2", "BISICLES3"]
+            },
+            "DMI" : {
+                "models" : ["PISM0", "PISM1", "PISM2", "PISM3", "PISM4"]
+            }
+        },
+        "experiments": ["init", "ctrl", "asmb"]
     }
 }
