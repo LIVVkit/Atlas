@@ -6,9 +6,14 @@ from __future__ import absolute_import, division, print_function, unicode_litera
 import six
 
 import os
+import subprocess
 
+import livvkit
 from livvkit.util import elements as EL
 from livvkit.util import functions as FN
+
+_DEBUG = False
+
 
 def mip_config(mip_name):
     mip_path = os.path.dirname(os.path.abspath(__file__))
@@ -28,6 +33,8 @@ def run(mip_name, config):
     """
   
     mip = mip_config(mip_name)
+    img_dir = os.path.join(livvkit.output_dir, 'validation', 'imgs', mip_name)
+    FN.mkdir_p(img_dir)
 
     exp_img = {'init':'init_topg_test.png', 
                'ctrl':'ctrl_topg_test.png', 
@@ -40,9 +47,16 @@ def run(mip_name, config):
             for exp in config['experiments']:
                 images = []
                 for var in mip:
-                    
-                    
-                    images.append(EL.image(var, 'This shows '+var, exp_img[exp]))
+                    ice_sheet = mip_name.split('-')[-1]
+                    img_name = '_'.join([var, ice_sheet, group, model, exp]) + '.png'
+                    img_file = os.path.relpath(os.path.join(img_dir, img_name), os.getcwd())
+                  
+                    data_dir = os.path.join(os.path.abspath(config['data_path']), group, model, exp)
+                    data_name = '_'.join([var, ice_sheet, group, model, exp]) + '.nc'
+                    data_file = os.path.relpath(os.path.join(data_dir, data_name), os.getcwd())
+
+                    plot_var(config['plot_script'], data_file, img_file, exp, var, mip)
+                    images.append(EL.image(var, '', '/'.join([mip_name, img_name]) ))
 
                 elements = []
                 elements.append(EL.gallery('Var gallery', images))
@@ -54,6 +68,30 @@ def run(mip_name, config):
             pages[page_name] = EL.page(page_name, 'A Group-model submission.', tab_list=tabs)
 
     return EL.book(mip_name, __doc__, page_dict=pages) 
+
+
+def plot_var(plot_script, data_file, img_file, exp, var, mip):
+    ncl_command = ' '.join(["ncl", "-Q",
+                            "'afile=\"" + data_file + "\"'",
+                            "'ofile=\"" + img_file + "\"'",
+                            "'aexp=\"" + exp + "\"'",
+                            "'avar=\"" + var + "\"'",
+                            "'atsp=" + str(mip[var]['timestep'][exp]) + "'",
+                            "'apal=\"" + mip[var]['palette'] + "\"'",
+                            "'amod=" + str(mip[var]['levelmode']) + "'",
+                            "'amin=" + str(mip[var]['lmin']) + "'",
+                            "'amax=" + str(mip[var]['lmax']) + "'",
+                            "'alsp=" + str(mip[var]['lstep']) + "'",
+                            "'alvl=" + mip[var]['levels'] + "'",
+                            plot_script])
+                            
+    proc = subprocess.Popen(ncl_command, shell=True, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
+    pout, perr = proc.communicate()
+    # NOTE: ncl prints errors to stdout because of course it does.
+    if _DEBUG:
+        with open(ncl_errors.txt, 'a') as f:
+            f.write(ncl_command)
+            f.write(pout)  
 
 
 def print_summary(case, summary):
@@ -72,7 +110,8 @@ def summarize_result(results_book):
     to the sumamry as well as being printed out in this module's
     print_summary method
     """
-    FN.write_json(results_book, './', 'temp_book.json')
+    if _DEBUG:
+        FN.write_json(results_book, './', 'temp_book.json')
 
     summary = {}
     for page_name in results_book['Data']:

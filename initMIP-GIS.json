@@ -1,0 +1,227 @@
+{
+    "acabf" : {
+        "timestep" : {"init": 0, "ctrl": 20, "asmb": 20},
+        "palette" : "WhiteBlueGreenYellowRed",
+        "levelmode" : 2,
+        "lmin" : 0,
+        "lmax" : 0,
+        "lstep": 0,
+        "levels" : "(/-2e-3,-1e-3,-5e-4,-2e-4,-1e-4,-5e-5,-2e-5,-1e-5,0,5e-6,1e-5,1.5e-5,2e-5,2.5e-5,3e-5,3.5e-5,4e-5,4.5e-5/)"
+    },
+    "dlithkdt" : {
+        "timestep" : {"init": 0, "ctrl": 20, "asmb": 20},
+        "palette" : "WhiteBlueGreenYellowRed",
+        "levelmode" : 0,
+        "lmin" : 0,
+        "lmax" : 0,
+        "lstep": 0,
+        "levels" : "(/0/)"
+    },
+    "hfgeoubed" : {
+        "timestep" : {"init": 0, "ctrl": 20, "asmb": 20},
+        "palette" : "WhiteBlueGreenYellowRed",
+        "levelmode" : 0,
+        "lmin" : 0,
+        "lmax" : 0,
+        "lstep": 0,
+        "levels" : "(/0/)"
+    },
+    "libmassbf" : {
+        "timestep" : {"init": 0, "ctrl": 20, "asmb": 20},
+        "palette" : "GMT_wysiwygcont",
+        "levelmode" : 0,
+        "lmin" : 0,
+        "lmax" : 0,
+        "lstep": 0,
+        "levels" : "(/0/)"
+    },
+    "licalvf" : {
+        "timestep" : {"init": 0, "ctrl": 20, "asmb": 20},
+        "palette" : "GMT_wysiwygcont",
+        "levelmode" : 0,
+        "lmin" : 0,
+        "lmax" : 0,
+        "lstep": 0,
+        "levels" : "(/0/)"
+    },
+    "litempbot" : {
+        "timestep" : {"init": 0, "ctrl": 20, "asmb": 20},
+        "palette" : "WhiteBlueGreenYellowRed",
+        "levelmode" : 1,
+        "lmin" : 240,
+        "lmax" : 272,
+        "lstep": 2,
+        "levels" : "(/0/)"
+    },
+    "litempsnic" : {
+        "timestep" : {"init": 0, "ctrl": 20, "asmb": 20},
+        "palette" : "WhiteBlueGreenYellowRed",
+        "levelmode" : 1,
+        "lmin" : 240,
+        "lmax" : 272,
+        "lstep": 2,
+        "levels" : "(/0/)"
+    },
+    "lithk" : {
+        "timestep" : {"init": 0, "ctrl": 20, "asmb": 20},
+        "palette" : "WhiteBlueGreenYellowRed",
+        "levelmode" : 1,
+        "lmin" : 0,
+        "lmax" : 3000,
+        "lstep": 0,
+        "levels" : "(/0/)"
+    },
+    "orog" : {
+        "timestep" : {"init": 0, "ctrl": 20, "asmb": 20},
+        "palette" : "WhiteBlueGreenYellowRed",
+        "levelmode" : 1,
+        "lmin" : 0,
+        "lmax" : 3000,
+        "lstep": 0,
+        "levels" : "(/0/)"
+    },
+    "sftgrf" : {
+        "timestep" : {"init": 0, "ctrl": 20, "asmb": 20},
+        "palette" : "MPL_Greys",
+        "levelmode" : 1,
+        "lmin" : 0,
+        "lmax" : 1,
+        "lstep": 0.1,
+        "levels" : "(/0/)"
+    },
+    "sftflf" : {
+        "timestep" : {"init": 0, "ctrl": 20, "asmb": 20},
+        "palette" : "MPL_Greys",
+        "levelmode" : 1,
+        "lmin" : 0,
+        "lmax" : 1,
+        "lstep": 0.1,
+        "levels" : "(/0/)"
+    },
+    "sftgif" : {
+        "timestep" : {"init": 0, "ctrl": 20, "asmb": 20},
+        "palette" : "MPL_Greys",
+        "levelmode" : 1,
+        "lmin" : 0,
+        "lmax" : 1,
+        "lstep": 0.1,
+        "levels" : "(/0/)"
+    },
+    "strbasemag" : {
+        "timestep" : {"init": 0, "ctrl": 20, "asmb": 20},
+        "palette" : "WhiteBlueGreenYellowRed",
+        "levelmode" : 1,
+        "lmin" : 0,
+        "lmax" : 100000,
+        "lstep": 10000,
+        "levels" : "(/0/)"
+    },
+    "topg" : {
+        "timestep" : {"init": 0, "ctrl": 20, "asmb": 20},
+        "palette" : "GMT_relief",
+        "levelmode" : 1,
+        "lmin" : -3000,
+        "lmax" : 3000,
+        "lstep": 200,
+        "levels" : "(/0/)"
+    },
+    "uvelbase" : {
+        "timestep" : {"init": 0, "ctrl": 20, "asmb": 20},
+        "palette" : "MPL_BrBG",
+        "levelmode" : 2,
+        "lmin" : 0,
+        "lmax" : 0,
+        "lstep": 0,
+        "levels" : "(/-1e-5,-3e-6,-1e-6,-3e-7,-1e-7,-3e-8,-1e-8,-3e-9,0,1e-9,3e-9,1e-8,3e-8,1e-7,3e-7,1e-6,3e-6,1e-5/)"
+    },
+    "uvelmean" : {
+        "timestep" : {"init": 0, "ctrl": 20, "asmb": 20},
+        "palette" : "MPL_BrBG",
+        "levelmode" : 2,
+        "lmin" : 0,
+        "lmax" : 0,
+        "lstep": 0,
+        "levels" : "(/-1e-5,-3e-6,-1e-6,-3e-7,-1e-7,-3e-8,-1e-8,-3e-9,0,1e-9,3e-9,1e-8,3e-8,1e-7,3e-7,1e-6,3e-6,1e-5/)"
+    },
+    "uvelsurf" : {
+        "timestep" : {"init": 0, "ctrl": 20, "asmb": 20},
+        "palette" : "MPL_BrBG",
+        "levelmode" : 2,
+        "lmin" : 0,
+        "lmax" : 0,
+        "lstep": 0,
+        "levels" : "(/-1e-5,-3e-6,-1e-6,-3e-7,-1e-7,-3e-8,-1e-8,-3e-9,0,1e-9,3e-9,1e-8,3e-8,1e-7,3e-7,1e-6,3e-6,1e-5/)"
+    },
+    "vvelbase" : {
+        "timestep" : {"init": 0, "ctrl": 20, "asmb": 20},
+        "palette" : "MPL_BrBG",
+        "levelmode" : 2,
+        "lmin" : 0,
+        "lmax" : 0,
+        "lstep": 0,
+        "levels" : "(/-1e-5,-3e-6,-1e-6,-3e-7,-1e-7,-3e-8,-1e-8,-3e-9,0,1e-9,3e-9,1e-8,3e-8,1e-7,3e-7,1e-6,3e-6,1e-5/)"
+    },
+    "vvelmean" : {
+        "timestep" : {"init": 0, "ctrl": 20, "asmb": 20},
+        "palette" : "MPL_BrBG",
+        "levelmode" : 2,
+        "lmin" : 0,
+        "lmax" : 0,
+        "lstep": 0,
+        "levels" : "(/-1e-5,-3e-6,-1e-6,-3e-7,-1e-7,-3e-8,-1e-8,-3e-9,0,1e-9,3e-9,1e-8,3e-8,1e-7,3e-7,1e-6,3e-6,1e-5/)"
+    },
+    "vvelsurf" : {
+        "timestep" : {"init": 0, "ctrl": 20, "asmb": 20},
+        "palette" : "MPL_BrBG",
+        "levelmode" : 2,
+        "lmin" : 0,
+        "lmax" : 0,
+        "lstep": 0,
+        "levels" : "(/-1e-5,-3e-6,-1e-6,-3e-7,-1e-7,-3e-8,-1e-8,-3e-9,0,1e-9,3e-9,1e-8,3e-8,1e-7,3e-7,1e-6,3e-6,1e-5/)"
+    },
+    "wvelbase" : {
+        "timestep" : {"init": 0, "ctrl": 20, "asmb": 20},
+        "palette" : "BlueWhiteOrangeRed",
+        "levelmode" : 2,
+        "lmin" : 0,
+        "lmax" : 0,
+        "lstep": 0,
+        "levels" : "(/-1e-5,-3e-6,-1e-6,-3e-7,-1e-7,-3e-8,-1e-8,-3e-9,-1e-9,-3e-10,-1e-10,0,1e-10,3e-10,1e-9,3e-9,1e-8,3e-8,1e-7,3e-7,1e-6,3e-6,1e-5/)"
+    },
+    "wvelsurf" : {
+        "timestep" : {"init": 0, "ctrl": 20, "asmb": 20},
+        "palette" : "BlueWhiteOrangeRed",
+        "levelmode" : 2,
+        "lmin" : 0,
+        "lmax" : 0,
+        "lstep": 0,
+        "levels" : "(/-1e-5,-3e-6,-1e-6,-3e-7,-1e-7,-3e-8,-1e-8,-3e-9,0,1e-9,3e-9,1e-8,3e-8,1e-7,3e-7,1e-6,3e-6,1e-5/)"
+    },
+    "velbase" : {
+        "timestep" : {"init": 0, "ctrl": 20, "asmb": 20},
+        "palette" : "WhiteBlueGreenYellowRed",
+        "levelmode" : 2,
+        "lmin" : 0,
+        "lmax" : 0,
+        "lstep": 0,
+        "levels" : "(/1e-15,3e-15,1e-14,3e-14,1e-13,3e-13,1e-12,3e-12,1e-11,3e-11,1e-10,3e-10,1e-9,3e-9/)"
+    },
+    "velmean" : {
+        "timestep" : {"init": 0, "ctrl": 20, "asmb": 20},
+        "palette" : "WhiteBlueGreenYellowRed",
+        "levelmode" : 2,
+        "lmin" : 0,
+        "lmax" : 0,
+        "lstep": 0,
+        "levels" : "(/1e-15,3e-15,1e-14,3e-14,1e-13,3e-13,1e-12,3e-12,1e-11,3e-11,1e-10,3e-10,1e-9,3e-9/)"
+    },
+    "velsurf" : {
+        "timestep" : {"init": 0, "ctrl": 20, "asmb": 20},
+        "palette" : "WhiteBlueGreenYellowRed",
+        "levelmode" : 2,
+        "lmin" : 0,
+        "lmax" : 0,
+        "lstep": 0,
+        "levels" : "(/1e-15,3e-15,1e-14,3e-14,1e-13,3e-13,1e-12,3e-12,1e-11,3e-11,1e-10,3e-10,1e-9,3e-9/)"
+    }
+}

@@ -1,9 +1,11 @@
 {
-    "initMIP-GrIS" : {
+    "initMIP-GIS" : {
         "module" : "atlas.py",
+        "plot_script" : "atlas.ncl",
+        "data_path" : "data/GrIS/output",
         "groups" : {
             "ARC" : {
-                "models" : ["PISM5KM_CF"]
+                "models" : ["PISM5KM"]
             },
             "BGC" : {
                 "models" : ["BISICLES1", "BISICLES2", "BISICLES3"]
