@@ -143,7 +143,6 @@ def check_scalar_meta(nc_var, scalars):
         meta = details['meta']
         var_data = nc_var.variables[var] 
         ncattr = var_data.ncattrs()
-        print(ncattr)
         if 'standard_name' not in ncattr:
             message.append('scalar {} missing attribute: "standard_name" '.format(var))
         elif var_data.getncattr('standard_name') != meta['standard_name']:
