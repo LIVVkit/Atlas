@@ -47,10 +47,14 @@ def run(mip_name, config):
             for exp in config['experiments']:
                 images = []
                 err_msg = []
+                data_dir = os.path.join(os.path.abspath(config['data_path']), group, model, exp)
+                if not os.path.exists(data_dir):
+                    err_msg.append('Could not find {}-{} experiment {} in <br> &emsp; {}'.format(group, model, data_dir))
+                    continue
+
                 for var in mip:
                     ice_sheet = mip_name.split('-')[-1]
                     
-                    data_dir = os.path.join(os.path.abspath(config['data_path']), group, model, exp)
                     data_name = '_'.join([var, ice_sheet, group, model, exp]) + '.nc'
                     data_file = os.path.relpath(os.path.join(data_dir, data_name), os.getcwd())
 
