@@ -6,8 +6,10 @@ from __future__ import absolute_import, division, print_function, unicode_litera
 import six
 
 import os
+import warnings
 import subprocess
 
+import numpy as np
 from netCDF4 import Dataset
 
 import livvkit
@@ -140,55 +142,57 @@ def check_meta(data_file, var, mip):
             return message
 
     if var == 'scalar':
-        message.extend(check_scalar_meta(nc_var, mip[var]))
+        for var, details in six.iteritems(mip[var]):
+            meta = details['meta']
+            message.extend(check_var_meta(var, nc_var, data_file, meta))
     else:
         meta = mip[var]['meta']
-        var_data = nc_var.variables[var] 
-        ncattr = var_data.ncattrs()
-        if 'standard_name' not in ncattr:
-            message.append('{} missing attribute: "standard_name" '.format(var))
-        elif var_data.getncattr('standard_name') != meta['standard_name']:
-            message.append('{} standard name is "{}" but  it should be "{}" '.format(
-                               var, var_data.getncattr('standard_name'), meta['standard_name']))
-
-        if 'units' not in ncattr:
-            message.append('{} missing attribute: "units" '.format(var))
-
-        ndims = len(var_data[:].shape)
-        if ndims != len(meta['dims']):
-            message.append('{} has  {} dimensions but it should have {} '.format(var, ndims, len(meta['dims'])))
-
+        message.extend(check_var_meta(var, nc_var, data_file, meta))
+        
     return message
 
 
-def check_scalar_meta(nc_var, scalars):
+def check_var_meta(var, nc_var, data_file, meta):
     """
-    Chec the attributes of the scalar variables in scalar netCDF datafile. 
+    Chec the attributes of the variables in netCDF datafile. 
 
     Args:
         nc_var: A netCDF Dataset (from python-netCDF) of the scalar variables
-        scalars: A dictionary describing the scalar variables as they should appear 
+        data_file: The path to the netCDF data file
+        meta: A dictionary describing the variables metadata as they should appear 
 
     Returns: A list of error messages
     """
     message = []
-    message = []
-    for var, details in six.iteritems(scalars):
-        meta = details['meta']
-        var_data = nc_var.variables[var] 
-        ncattr = var_data.ncattrs()
-        if 'standard_name' not in ncattr:
-            message.append('scalar {} missing attribute: "standard_name" '.format(var))
-        elif var_data.getncattr('standard_name') != meta['standard_name']:
-            message.append('scalar {} standard name is "{}" but  it should be "{}" '.format(
-                               var, var_data.getncattr('standard_name'), meta['standard_name']))
 
-        if 'units' not in ncattr:
-            message.append('scalar {} missing attribute: "units" '.format(var))
+    nc_var_actual = [v for v in nc_var.variables]
+    if var not in nc_var_actual:
+        msg = '{} not found in: <br> &emsp; {}'.format(var, data_file)
+        message.append(msg)
+        return message
 
-        ndims = len(var_data[:].shape)
-        if ndims != len(meta['dims']):
-            message.append('scalar {} has  {} dimensions but it should have {} '.format(var, ndims, len(meta['dims'])))
+    var_data = nc_var.variables[var]
+    with warnings.catch_warnings():
+        warnings.simplefilter('ignore')
+        if np.isnan(var_data).any():
+            message.append('{} contains NaNs in: <br> &emsp; {}'.format(var, data_file))
+
+    ncattr = var_data.ncattrs()
+    if 'standard_name' not in ncattr:
+        message.append('{} missing attribute: "standard_name" in: <br> &emsp; {}'.format(var, data_file))
+    elif var_data.getncattr('standard_name') != meta['standard_name']:
+        message.append('{} standard name is "{}" but  it should be "{}" in: <br> &emsp; {}'.format(
+                           var, var_data.getncattr('standard_name'), meta['standard_name'], data_file))
+
+    if 'units' not in ncattr:
+        message.append('{} missing attribute: "units" in: <br> &emsp; {}'.format(var, data_file))
+
+    ndims = len(var_data.shape)
+    if not ndims:
+        message.append('{} has no dimentions, data could not be read in: <br> &emsp; {}'.format(var, data_file))
+    elif ndims != len(meta['dims']):
+        message.append('{} has  {} dimensions but it should have {} in: <br> &emsp; {}'.format(
+                            var, ndims, len(meta['dims']), data_file))
 
     return message
 
