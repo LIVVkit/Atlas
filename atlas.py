@@ -71,7 +71,7 @@ def run(mip_name, config):
 
                 elements = []
                 if not err_msg:
-                    err_msg_str = 'None<br><p style="color:black">Everything looks good!</p>'
+                    err_msg_str = 'None<br><p style="color:green">Everything looks good!</p>'
                 else:
                     err_msg_str = '<br>' + '<br><br>'.join(err_msg)
                 elements.append(EL.error('Meta check', err_msg_str))
