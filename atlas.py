@@ -65,7 +65,9 @@ def run(mip_name, config):
                         img_file = os.path.relpath(os.path.join(img_dir, img_name), os.getcwd())
                       
                         plot_var(config['plot_script'], data_file, img_file, exp, var, mip)
-                        images.append(EL.image(var, '', '/'.join([mip_name, img_name]) ))
+                        images.append(EL.image(var, 
+                                               mip[var]['meta']['standard_name'], 
+                                               '/'.join([mip_name, img_name]) ))
 
                 elements = []
                 if not err_msg:
