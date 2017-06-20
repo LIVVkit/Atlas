@@ -4,9 +4,7 @@
         "plot_script" : "atlas.ncl",
         "data_path" : "data/GrIS/output",
         "groups" : {
-            "ARC" : ["PISM5KM"],
-            "BGC" : ["BISICLES1", "BISICLES2", "BISICLES3"],
-            "DMI" : ["PISM0", "PISM1", "PISM2", "PISM3", "PISM4"]
+            "ARC" :  ["PISM5KM"]
         },
         "experiments": ["init", "ctrl", "asmb"]
     }
