@@ -11,7 +11,7 @@ Installation:
 The ISMIP6 Atlas is an extension to `LIVVkit 2.1+ <https://github.com/LIVVkit/LIVVkit>`__, which is
 a python 2 and 3 compatible verification and validation toolkit for ice sheet models. LIVVkit is
 distributed on Both PyPi and Anaconda, and can be installed by following its `installation
-instructions <>`__. 
+instructions <https://livvkit.github.io/Docs/install.html>`__. 
 
 In addition to LIVVkit, Atlas requires:
 
@@ -45,11 +45,9 @@ Once the environment is setup, activate it by issuing this command:
 Usage
 -----
 
-.. note:: 
-    
-    These instructions assume you're current working directory is the directory containing Atlas.
-    You can work from any directory, but all paths in the JSON configuration files must be edited to
-    absolute paths or relative paths from your current working directory (not recommended). 
+*Note: These instructions assume you're current working directory is the directory containing Atlas.
+You can work from any directory, but all paths in the JSON configuration files must be edited to
+absolute paths or relative paths from your current working directory (not recommended).* 
 
 Atlas is controlled by a JSON configuration file which describes the submission, which ISMIP6 Project
 the submission is for, and the NCL plot script used for the diagnostic plots. For example, to test
@@ -65,8 +63,7 @@ like:
             "data_path" : "data/GrIS/output",
             "experiments": ["init", "ctrl", "asmb"],
             "groups" : {
-                "ARC" : {
-                    "models" : ["PISM5KM"]
+                "ARC" : ["PISM5KM"]
                 }
             }
         }
@@ -77,11 +74,14 @@ like:
 
 .. code-block:: bash
 
-    livv -V atlas.json -o results
+    livv -V atlas-ARC-PISM5KM.json -o results
 
 and LIVVkit would produce an website detailing the results of the analysis and the diagnositic plots
 in the `results` directory. This website can then be viewed locally in your favorite web browser. 
 
+*Note: if you're having trouble viewing the output or the website appear blank, you're browser may
+be blocking the exectuion of local resources like javascript. See the* `LIVVkit FAQs
+<https://livvkit.github.io/Docs/faq.html>`__ *for a workaround.* 
 
 The configuration files
 -----------------------
@@ -177,7 +177,7 @@ dictionaries of the form:
                 "standard_name" : "...",
                 "units" : "..."
             },
-            "timestep" : {"init": 0., "ctrl": 20, "asmb": 20},
+            "timestep" : {"init": 0, "ctrl": 20, "asmb": 20},
             "palette" : "...",
             "levelmode" : 0,
             "lmin" : 0,
