@@ -1,0 +1,19 @@
+name: Atlas
+channels:
+- conda-forge
+- defaults
+dependencies:
+- python=3
+- ipython
+- matplotlib
+- numpy
+- scipy
+- ncl
+- netcdf4
+- netcdf-fortran
+- libnetcdf
+- hdf4
+- hdf5
+- six
+- pip:
+  - json-tricks
