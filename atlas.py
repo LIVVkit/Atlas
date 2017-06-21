@@ -69,6 +69,8 @@ def run(mip_name, config):
                                                mip[var]['meta']['standard_name'], 
                                                '/'.join([mip_name, img_name]) ))
 
+                elements.append(EL.gallery('Var gallery', images))
+               
                 elements = []
                 if not err_msg:
                     err_msg_str = 'None<br><p style="color:green">Everything looks good!</p>'
@@ -76,8 +78,6 @@ def run(mip_name, config):
                     err_msg_str = '<br>' + '<br><br>'.join(err_msg)
                 elements.append(EL.error('Meta check', err_msg_str))
                 
-                elements.append(EL.gallery('Var gallery', images))
-               
                 tabs.append(EL.tab(exp, element_list=elements))
 
             page_name = '-'.join([group, model])
