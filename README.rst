@@ -193,7 +193,8 @@ dictionaries of the form:
                         "standard_name" : "...",
                         "units" : "..."
                 }
-            }
+            },
+            ...
         }
     }
 
