@@ -49,7 +49,7 @@ def run(mip_name, config):
                 err_msg = []
                 data_dir = os.path.join(os.path.abspath(config['data_path']), group, model, exp)
                 if not os.path.exists(data_dir):
-                    err_msg.append('Could not find {}-{} experiment {} in <br> &emsp; {}'.format(group, model, data_dir))
+                    err_msg.append('Could not find {}-{} experiment {} in <br> &emsp; {}'.format(group, model, exp, data_dir))
                     continue
 
                 for var in mip:
@@ -69,9 +69,9 @@ def run(mip_name, config):
                                                mip[var]['meta']['standard_name'], 
                                                '/'.join([mip_name, img_name]) ))
 
+                elements = []
                 elements.append(EL.gallery('Var gallery', images))
                
-                elements = []
                 if not err_msg:
                     err_msg_str = 'None<br><p style="color:green">Everything looks good!</p>'
                 else:
@@ -178,10 +178,10 @@ def check_var_meta(var, nc_var, data_file, meta):
         return message
 
     var_data = nc_var.variables[var]
-    with warnings.catch_warnings():
-        warnings.simplefilter('ignore')
-        if np.isnan(var_data).any():
-            message.append('{} contains NaNs in: <br> &emsp; {}'.format(var, data_file))
+    # with warnings.catch_warnings():
+    #     warnings.simplefilter('ignore')
+    #     if np.isnan(var_data).any():
+    #         message.append('{} contains NaNs in: <br> &emsp; {}'.format(var, data_file))
 
     ncattr = var_data.ncattrs()
     if 'standard_name' not in ncattr:
