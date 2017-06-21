@@ -50,24 +50,23 @@ def run(mip_name, config):
                 data_dir = os.path.join(os.path.abspath(config['data_path']), group, model, exp)
                 if not os.path.exists(data_dir):
                     err_msg.append('Could not find {}-{} experiment {} in <br> &emsp; {}'.format(group, model, exp, data_dir))
-                    continue
+                else:
+                    for var in mip:
+                        ice_sheet = mip_name.split('-')[-1]
+                        
+                        data_name = '_'.join([var, ice_sheet, group, model, exp]) + '.nc'
+                        data_file = os.path.relpath(os.path.join(data_dir, data_name), os.getcwd())
 
-                for var in mip:
-                    ice_sheet = mip_name.split('-')[-1]
-                    
-                    data_name = '_'.join([var, ice_sheet, group, model, exp]) + '.nc'
-                    data_file = os.path.relpath(os.path.join(data_dir, data_name), os.getcwd())
-
-                    err_msg.extend(check_meta(data_file, var, mip))
-                    
-                    if var != 'scalar':
-                        img_name = '_'.join([var, ice_sheet, group, model, exp]) + '.png'
-                        img_file = os.path.relpath(os.path.join(img_dir, img_name), os.getcwd())
-                      
-                        plot_var(config['plot_script'], data_file, img_file, exp, var, mip)
-                        images.append(EL.image(var, 
-                                               mip[var]['meta']['standard_name'], 
-                                               '/'.join([mip_name, img_name]) ))
+                        err_msg.extend(check_meta(data_file, var, mip))
+                        
+                        if var != 'scalar':
+                            img_name = '_'.join([var, ice_sheet, group, model, exp]) + '.png'
+                            img_file = os.path.relpath(os.path.join(img_dir, img_name), os.getcwd())
+                          
+                            plot_var(config['plot_script'], data_file, img_file, exp, var, mip)
+                            images.append(EL.image(var, 
+                                                   mip[var]['meta']['standard_name'], 
+                                                   '/'.join([mip_name, img_name]) ))
 
                 elements = []
                 elements.append(EL.gallery('Var gallery', images))
@@ -216,7 +215,7 @@ def print_summary(case, summary):
     """
     print('    Ran ISMIP6 Atlas for {}'.format(case))
     for name, smry in six.iteritems(summary):
-        print('      {} experiments found: {}'.format(name, smry['Experiments']))
+        print('      Analyzed {} experiments: {}'.format(name, smry['Experiments']))
     print('')
 
 
