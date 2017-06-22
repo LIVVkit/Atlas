@@ -10,6 +10,7 @@ import warnings
 import subprocess
 
 import numpy as np
+import matplotlib.pyplot as plt
 from netCDF4 import Dataset
 
 import livvkit
@@ -56,14 +57,15 @@ def run(mip_name, config):
                         
                         data_name = '_'.join([var, ice_sheet, group, model, exp]) + '.nc'
                         data_file = os.path.relpath(os.path.join(data_dir, data_name), os.getcwd())
-
-                        err_msg.extend(check_meta(data_file, var, mip))
+                        
+                        msg, var_data = check_meta(data_file, var, mip)
+                        err_msg.extend(msg)
                         
                         if var != 'scalar':
                             img_name = '_'.join([var, ice_sheet, group, model, exp]) + '.png'
                             img_file = os.path.relpath(os.path.join(img_dir, img_name), os.getcwd())
                           
-                            plot_var(config['plot_script'], data_file, img_file, exp, var, mip)
+                            plot_var(var_data, img_file, exp, var, mip)
                             images.append(EL.image(var, 
                                                    mip[var]['meta']['standard_name'], 
                                                    '/'.join([mip_name, img_name]) ))
@@ -85,7 +87,7 @@ def run(mip_name, config):
     return EL.book(mip_name, __doc__, page_dict=pages) 
 
 
-def plot_var(plot_script, data_file, img_file, exp, var, mip):
+def plot_var(var_data, img_file, exp, var, mip):
     """
     Use an external NCL plot script to plot a variable from a data file. 
 
@@ -99,27 +101,17 @@ def plot_var(plot_script, data_file, img_file, exp, var, mip):
 
     Returns: N/A
     """
-    ncl_command = ' '.join(["ncl", "-Q",
-                            "'afile=\"{}\"'".format(data_file),
-                            "'ofile=\"{}\"'".format(img_file),
-                            "'aexp=\"{}\"'".format(exp),
-                            "'avar=\"{}\"'".format(var),
-                            "'atsp={}'".format(mip[var]['timestep'][exp]),
-                            "'apal=\"{}\"'".format(mip[var]['palette']),
-                            "'amod={}'".format(mip[var]['levelmode']),
-                            "'amin={}'".format(mip[var]['lmin']),
-                            "'amax={}'".format(mip[var]['lmax']),
-                            "'alsp={}'".format(mip[var]['lstep']),
-                            "'alvl={}'".format(mip[var]['levels']),
-                            plot_script])
-                            
-    proc = subprocess.Popen(ncl_command, shell=True, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
-    pout, perr = proc.communicate()
-    # NOTE: ncl prints errors to stdout because of course it does.
-    if _DEBUG:
-        with open(ncl_errors.txt, 'a') as f:
-            f.write(ncl_command)
-            f.write(pout)  
+    fig, ax = plt.subplots(1,1, figsize=(10,8), dpi=100)
+    plt.rc('text', usetex=True)
+    plt.rc('font', family='serif')
+
+    ax.imshow(var_data[-1,::-1,:])
+    ax.set_title(var)
+
+    fig.tight_layout()
+    fig.savefig(img_file, bbox_inches='tight')
+    
+    plt.close(fig)
 
 
 def check_meta(data_file, var, mip):
@@ -137,24 +129,26 @@ def check_meta(data_file, var, mip):
     if not os.path.exists(data_file):
         msg = '{} file missing: <br> &emsp; {}'.format(var, data_file)
         message.append(msg)
-        return message
+        return (message, None)
     else:
         try:
             nc_var = Dataset(data_file, 'r')
         except:
             msg = '{} file could not be read: <br> &emsp; {}'.format(var, data_file)
             message.append(msg)
-            return message
+            return (message, None)
 
     if var == 'scalar':
-        for var, details in six.iteritems(mip[var]):
+        for v, details in six.iteritems(mip[var]):
             meta = details['meta']
-            message.extend(check_var_meta(var, nc_var, data_file, meta))
+            msg, var_data = check_var_meta(v, nc_var, data_file, meta)
+            message.extend(msg)
     else:
         meta = mip[var]['meta']
-        message.extend(check_var_meta(var, nc_var, data_file, meta))
+        msg, var_data = check_var_meta(var, nc_var, data_file, meta)
+        message.extend(msg)
         
-    return message
+    return (message, var_data)
 
 
 def check_var_meta(var, nc_var, data_file, meta):
@@ -174,13 +168,13 @@ def check_var_meta(var, nc_var, data_file, meta):
     if var not in nc_var_actual:
         msg = '{} not found in: <br> &emsp; {}'.format(var, data_file)
         message.append(msg)
-        return message
+        return (message, None)
 
     var_data = nc_var.variables[var]
-    # with warnings.catch_warnings():
-    #     warnings.simplefilter('ignore')
-    #     if np.isnan(var_data).any():
-    #         message.append('{} contains NaNs in: <br> &emsp; {}'.format(var, data_file))
+    with warnings.catch_warnings():
+        warnings.simplefilter('ignore')
+        if np.isnan(var_data).any():
+            message.append('{} contains NaNs in: <br> &emsp; {}'.format(var, data_file))
 
     ncattr = var_data.ncattrs()
     if 'standard_name' not in ncattr:
@@ -199,7 +193,7 @@ def check_var_meta(var, nc_var, data_file, meta):
         message.append('{} has  {} dimensions but it should have {} in: <br> &emsp; {}'.format(
                             var, ndims, len(meta['dims']), data_file))
 
-    return message
+    return (message, var_data)
 
 
 
