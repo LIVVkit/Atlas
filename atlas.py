@@ -58,7 +58,7 @@ def run(mip_name, config):
                         data_name = '_'.join([var, ice_sheet, group, model, exp]) + '.nc'
                         data_file = os.path.relpath(os.path.join(data_dir, data_name), os.getcwd())
                         
-                        msg, var_data = check_meta(data_file, var, mip)
+                        msg, var_data, nc_var = check_meta(data_file, var, mip)
                         err_msg.extend(msg)
                         
                         if var != 'scalar':
@@ -67,8 +67,10 @@ def run(mip_name, config):
                           
                             plot_var(var_data, img_file, exp, var, mip)
                             images.append(EL.image(var, 
-                                                   mip[var]['meta']['standard_name'], 
+                                                   mip[var]['meta']['standard_name'].replace('_',' '), 
                                                    '/'.join([mip_name, img_name]) ))
+                        if nc_var:
+                            nc_var.close()
 
                 elements = []
                 elements.append(EL.gallery('Var gallery', images))
@@ -89,23 +91,35 @@ def run(mip_name, config):
 
 def plot_var(var_data, img_file, exp, var, mip):
     """
-    Use an external NCL plot script to plot a variable from a data file. 
+    Plot a variable from a netCDF Dataset following the MIP configuration. 
 
     Args:
-        plot_script: Path to the NCL plot script
-        data_file: Path to the NetCDF data file containing the variable's data
-        img_file: path to save the image file to
+        var_data: NetCDF Dataset class containing the variable's data
+        img_file: Path to save the image file to
         exp: Name of the experiment being analyzed 
         var: Name of the variable to plot
-        config: A dictionary representation of the MIP configuration
+        mip: A dictionary representation of the MIP configuration
 
     Returns: N/A
     """
-    fig, ax = plt.subplots(1,1, figsize=(10,8), dpi=100)
+    tstep = mip[var]['timestep'][exp]
+    cmap = mip[var]['colormap']
+
+    fig, ax = plt.subplots(1,1, figsize=(5,8), dpi=100)
     plt.rc('text', usetex=True)
     plt.rc('font', family='serif')
 
-    ax.imshow(var_data[-1,::-1,:])
+    if mip[var]['lmode'] == 'auto':
+        lvls = None
+    elif mip[var]['lmode'] == 'manual':
+        lmin = mip[var]['lmin'] 
+        lmax = mip[var]['lmax'] 
+        lstep = mip[var]['lstep'] 
+        lvls = np.arange(lmin, lmax + lstep, lstep)
+    elif mip[var]['lmode'] == 'explicit':
+        lvls = mip[var]['levels'] 
+
+    ax.contourf(var_data[tstep,:,:], cmap=cmap, levels=lvls)
     ax.set_title(var)
 
     fig.tight_layout()
@@ -129,14 +143,14 @@ def check_meta(data_file, var, mip):
     if not os.path.exists(data_file):
         msg = '{} file missing: <br> &emsp; {}'.format(var, data_file)
         message.append(msg)
-        return (message, None)
+        return (message, None, None)
     else:
         try:
             nc_var = Dataset(data_file, 'r')
         except:
             msg = '{} file could not be read: <br> &emsp; {}'.format(var, data_file)
             message.append(msg)
-            return (message, None)
+            return (message, None, None)
 
     if var == 'scalar':
         for v, details in six.iteritems(mip[var]):
@@ -148,7 +162,7 @@ def check_meta(data_file, var, mip):
         msg, var_data = check_var_meta(var, nc_var, data_file, meta)
         message.extend(msg)
         
-    return (message, var_data)
+    return (message, var_data, nc_var)
 
 
 def check_var_meta(var, nc_var, data_file, meta):
