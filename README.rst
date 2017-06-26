@@ -260,9 +260,9 @@ Want to send us a private message?
 **Joseph H. Kennedy**
 
 * github: @jhkennedy
-* email: <a href="mailto:kennedyjh@ornl.gov">kennedyjh [at] ornl.gov</a>
+* email: `kennedyjh [at] ornl.gov <mailto:kennedyjh@ornl.gov>`__
 
 **Heiko Goelzer** 
 
-* email: <a href="mailto:h.goelzer@uu.nl">h.goelzer [at] uu.nl</a>
+* email: `h.goelzer [at] uu.nl <mailto:h.goelzer@uu.nl>`__
 
