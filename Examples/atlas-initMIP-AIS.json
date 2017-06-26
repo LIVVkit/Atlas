@@ -1,0 +1,19 @@
+{
+    "initMIP-GIS" : {
+        "module" : "atlas.py",
+        "data_path" : "data/GrIS/output",
+        "groups" : {
+            "ARC" : ["PISM1", "PISM2"],
+            "AWI" : ["PISM"],
+            "CPOM" : ["BISICLESPRELIM"],
+            "ILTS" : ["SICOPOLIS"],
+            "IMAU" : ["IMAUICE64"],
+            "JPL" : ["ISSM"],
+            "PSU" : ["EQNOMEC,GLNOMEC"],
+            "UCIJPL" : ["ISSM"],
+            "ULB" : ["FETISH"],
+            "VUB" : ["AISMPALEO"]
+        },
+        "experiments": ["init", "ctrl", "asmb"]
+    }
+}

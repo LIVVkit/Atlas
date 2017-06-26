@@ -1,0 +1,10 @@
+{
+    "initMIP-GIS" : {
+        "module" : "atlas.py",
+        "data_path" : "data/GrIS/output",
+        "groups" : {
+            "BGC" :  ["BISICLES1", "BISICLES2", "BISICLES3"]
+        },
+        "experiments": ["init", "ctrl", "asmb"]
+    }
+}
