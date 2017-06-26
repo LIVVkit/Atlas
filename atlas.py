@@ -120,10 +120,13 @@ def plot_var(var_data, img_file, exp, var, mip):
     elif mip[var]['lmode'] == 'explicit':
         lvls = mip[var]['levels'] 
   
-    if len(mip[var]['meta']['dims']) == 2:
-        plot_data = var_data[:,:]
-    else:
-        plot_data = var_data[tstep,:,:]
+    # Drop the ResouceWarning for datasets with NaNs
+    with warnings.catch_warnings():
+        warnings.simplefilter('ignore')
+        if len(mip[var]['meta']['dims']) == 2:
+            plot_data = var_data[:,:]
+        else:
+            plot_data = var_data[tstep,:,:]
 
     if lvls is not None:
         ax.contourf(plot_data, cmap=cmap, levels=lvls)
@@ -196,6 +199,7 @@ def check_var_meta(var, nc_var, data_file, meta):
         return (message, None)
 
     var_data = nc_var.variables[var]
+    # Drop the ResouceWarning for datasets with NaNs
     with warnings.catch_warnings():
         warnings.simplefilter('ignore')
         if np.isnan(var_data).any():
