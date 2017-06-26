@@ -1,0 +1,10 @@
+{
+    "initMIP-GIS" : {
+        "module" : "atlas.py",
+        "data_path" : "data/GrIS/output",
+        "groups" : {
+            "DMI" :  ["PISM0", "PISM1", "PISM2", "PISM3", "PISM4"]
+        },
+        "experiments": ["init", "ctrl", "asmb"]
+    }
+}

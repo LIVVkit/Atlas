@@ -13,15 +13,18 @@ a python 2 and 3 compatible verification and validation toolkit for ice sheet mo
 distributed on Both PyPi and Anaconda, and can be installed by following its `installation
 instructions <https://livvkit.github.io/Docs/install.html>`__. 
 
-In addition to LIVVkit, Atlas requires:
+For ease of use, we recommended using Anaconda/Miniconda to satisfy all the dependencies and setup
+an ISMIP6 Atlas environment. Alternatively, LIVVkit and Atlas can be installed using Python pip. 
 
-* NCL
+Anaconda/Miniconda
+~~~~~~~~~~~~~~~~~~
 
-For ease of use, we recommended using Anaconda/Miniconda to satisfy all the dependencies and setup an ISMIP6 Atlas environment from one
-of the provided YAML environment descriptions:
+Once you have `Anaconda <https://www.continuum.io/downloads>`__/`Miniconda
+<https://conda.io/docs/install/quick.html>`__ installed on your system, you can create an Atlas
+`conda` environment from one of the provided YAML environment descriptions:
 
-* `atlas_py3.yml`: (Recommended) A Python 3 based `conda` environment, including all the required dependencies.
-  Create the environment by issuing these commands:
+* `atlas_py3.yml`: (Recommended) A Python 3 based `conda` environment, including all the required
+  dependencies.  Create the environment by issuing these commands:
 
 .. code-block:: bash
     
@@ -41,6 +44,39 @@ Once the environment is setup, activate it by issuing this command:
 
     source deactivate && source activate Atlas
 
+Python pip
+~~~~~~~~~~
+
+Once you have `python and pip
+<http://python-guide-pt-br.readthedocs.io/en/latest/starting/installation/>`__ installed on your
+system, you'll need to install:
+
+* HDF4
+* HDF5
+* NetCDF4 with HDF4 support
+
+This will be much easier if you use a package manager (e.g., `yum`, `apt`, `brew`, `macports`; see `here for
+macs <http://alejandrosoto.net/blog/2016/08/16/setting-up-my-mac-for-climate-research/>`__).
+
+Then, install LIVVkit via `pip`:
+
+.. code-block:: bash
+
+    pip install livvkit
+
+Get the ISMIP6 Atlas
+~~~~~~~~~~~~~~~~~~~~
+
+To get the ISMIP6 Atlas, either clone it via github:
+
+.. code-block:: bash
+
+    git clone https://github.com/LIVVkit/Atlas.git
+    cd Atlas
+
+Or download and extract the latest version `https://github.com/LIVVkit/Atlas/archive/master.zip`__
+
+Atlas should now be ready to use. 
 
 Usage
 -----
@@ -49,17 +85,15 @@ Usage
 You can work from any directory, but all paths in the JSON configuration files must be edited to
 absolute paths or relative paths from your current working directory (not recommended).* 
 
-Atlas is controlled by a JSON configuration file which describes the submission, which ISMIP6 Project
-the submission is for, and the NCL plot script used for the diagnostic plots. For example, to test
-the PISM5KM submission to initMIP Greenland by the ARC modeling group, the JSON file would look
-like:
+Atlas is controlled by a JSON configuration file which describes the submission, which ISMIP6
+Project the submission is for. For example, to test the PISM5KM submission to initMIP Greenland by
+the ARC modeling group, the JSON file would look like:
 
 .. code-block:: json
 
     {
         "initMIP-GIS" : {
             "module" : "atlas.py",
-            "plot_script" : "atlas.ncl",
             "data_path" : "data/GrIS/output",
             "experiments": ["init", "ctrl", "asmb"],
             "groups" : {
@@ -76,7 +110,7 @@ like:
 
     livv -V atlas-ARC-PISM5KM.json -o results
 
-and LIVVkit would produce an website detailing the results of the analysis and the diagnositic plots
+and LIVVkit would produce an website detailing the results of the analysis and the diagnostic plots
 in the `results` directory. This website can then be viewed locally in your favorite web browser. 
 
 *Note: if you're having trouble viewing the output or the website appear blank, you're browser may
@@ -114,19 +148,17 @@ Will analyze initMIP submission for both Greenland and Antarctica. The nested pr
     {
         "initMIP-GIS" : {
             "module" : "atlas.py",
-            "plot_script" : "atlas.ncl",
             "data_path" : "data/GrIS/output",
             "experiments": ["init", "ctrl", "asmb"],
             "groups" : {...}
         }
     }
 
-describes what LIVVkit extension module to use for the analysis (always `"atlas.py"`), which NCL
-plot script to use for the diagnostic plots (`"atlas.ncl"` is the default), a directory containing
-the submission data (either a path relative to the working directory, or an absolute path), the
-names of the experiments run for that project, and a nested `"groups"` dictionary. 
+describes what LIVVkit extension module to use for the analysis (always `"atlas.py"`), a directory
+containing the submission data (either a path relative to the working directory, or an absolute
+path), the names of the experiments run for that project, and a nested `"groups"` dictionary. 
 
-The nested `nested `"groups"` dictionary: 
+The nested `"groups"` dictionary: 
 
 .. code-block:: json
 
@@ -155,58 +187,8 @@ the projects, multiple groups can be analyzed at the same time by adding them to
     }
 
 
-Adding a new  project
----------------------
-
-The projects currently available for analysis have a JSON configuration file in the `projects`
-subdirectory:
-
-* `initMIP-GIS.json`
-* `initMIP-AIS.json`
-
-To add a new project, you'll need to create a JSON file for that project containing nested
-dictionaries of the form:
-
-.. code-block:: json
-
-    {
-        "VAR" : {
-            "meta" : {
-                "dims" : [...],
-                "type" : "...",
-                "standard_name" : "...",
-                "units" : "..."
-            },
-            "timestep" : {"init": 0, "ctrl": 20, "asmb": 20},
-            "palette" : "...",
-            "levelmode" : 0,
-            "lmin" : 0,
-            "lmax" : 0,
-            "lstep": 0,
-            "levels" : "(/.../)"
-        },
-        "scalar" : {
-            "VAR" : {
-                    "meta" : {
-                        "dims" : [...],
-                        "type" : "...",
-                        "standard_name" : "...",
-                        "units" : "..."
-                }
-            },
-            ...
-        }
-    }
-
-where there are nested dictionaries for each 2D variables, describing the plotting style and
-expected metadata, and a final nested scalar dictionary containing a set of nested dictionaries for
-each scalar variable which describe each variables expected metadata. 
-
-
 Contributing
 ------------
-
-
 
 
 Contact us

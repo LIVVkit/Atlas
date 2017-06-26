@@ -64,8 +64,9 @@ def run(mip_name, config):
                         if var != 'scalar':
                             img_name = '_'.join([var, ice_sheet, group, model, exp]) + '.png'
                             img_file = os.path.relpath(os.path.join(img_dir, img_name), os.getcwd())
-                          
-                            plot_var(var_data, img_file, exp, var, mip)
+                            
+                            if var_data:
+                                plot_var(var_data, img_file, exp, var, mip)
                             images.append(EL.image(var, 
                                                    mip[var]['meta']['standard_name'].replace('_',' '), 
                                                    '/'.join([mip_name, img_name]) ))
@@ -118,8 +119,18 @@ def plot_var(var_data, img_file, exp, var, mip):
         lvls = np.arange(lmin, lmax + lstep, lstep)
     elif mip[var]['lmode'] == 'explicit':
         lvls = mip[var]['levels'] 
+  
+    if len(mip[var]['meta']['dims']) == 2:
+        plot_data = var_data[:,:]
+    else:
+        plot_data = var_data[tstep,:,:]
 
-    ax.contourf(var_data[tstep,:,:], cmap=cmap, levels=lvls)
+    if lvls is not None:
+        ax.contourf(plot_data, cmap=cmap, levels=lvls)
+    else:
+        ax.contourf(plot_data, cmap=cmap)
+        
+
     ax.set_title(var)
 
     fig.tight_layout()

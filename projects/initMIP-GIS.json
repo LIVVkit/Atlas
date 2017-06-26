@@ -7,7 +7,7 @@
             "units" : "kg m-2 s-1"
         },
         "timestep" : {"init": 0, "ctrl": 20, "asmb": 20},
-        "colormap" : "coolwarm",
+        "colormap" : "gist_ncar",
         "lmode" : "explicit",
         "lmin" : 0,
         "lmax" : 0,
@@ -22,7 +22,7 @@
             "units" : "m s-1"
         },
         "timestep" : {"init": 0, "ctrl": 20, "asmb": 20},
-        "colormap" : "coolwarm",
+        "colormap" : "gist_ncar",
         "lmode" : "auto",
         "lmin" : 0,
         "lmax" : 0,
@@ -37,7 +37,7 @@
             "units" : "W m-2"
         },
         "timestep" : {"init": 0, "ctrl": 20, "asmb": 20},
-        "colormap" : "coolwarm",
+        "colormap" : "gist_ncar",
         "lmode" : "auto",
         "lmin" : 0,
         "lmax" : 0,
@@ -52,7 +52,7 @@
             "units" : "kg m-2 s-1"
         },
         "timestep" : {"init": 0, "ctrl": 20, "asmb": 20},
-        "colormap" : "bone",
+        "colormap" : "gist_rainbow",
         "lmode" : "auto",
         "lmin" : 0,
         "lmax" : 0,
@@ -67,7 +67,7 @@
             "units" : "kg m-2 s-1"
         },
         "timestep" : {"init": 0, "ctrl": 20, "asmb": 20},
-        "colormap" : "bone",
+        "colormap" : "gist_rainbow",
         "lmode" : "auto",
         "lmin" : 0,
         "lmax" : 0,
@@ -82,7 +82,7 @@
             "units" : "K"
         },
         "timestep" : {"init": 0, "ctrl": 20, "asmb": 20},
-        "colormap" : "coolwarm",
+        "colormap" : "gist_ncar",
         "lmode" : "manual",
         "lmin" : 240,
         "lmax" : 272,
@@ -97,7 +97,7 @@
             "units" : "K"
         },
         "timestep" : {"init": 0, "ctrl": 20, "asmb": 20},
-        "colormap" : "coolwarm",
+        "colormap" : "gist_ncar",
         "lmode" : "manual",
         "lmin" : 240,
         "lmax" : 272,
@@ -112,7 +112,7 @@
             "units" : "m"
         },
         "timestep" : {"init": 0, "ctrl": 20, "asmb": 20},
-        "colormap" : "coolwarm",
+        "colormap" : "gist_ncar",
         "lmode" : "manual",
         "lmin" : 0,
         "lmax" : 3000,
@@ -127,7 +127,7 @@
             "units" : "m"
         },
         "timestep" : {"init": 0, "ctrl": 20, "asmb": 20},
-        "colormap" : "coolwarm",
+        "colormap" : "gist_ncar",
         "lmode" : "manual",
         "lmin" : 0,
         "lmax" : 3000,
@@ -142,7 +142,7 @@
             "units" : "1"
         },
         "timestep" : {"init": 0, "ctrl": 20, "asmb": 20},
-        "colormap" : "gray",
+        "colormap" : "Greys",
         "lmode" : "manual",
         "lmin" : 0,
         "lmax" : 1,
@@ -157,7 +157,7 @@
             "units" : "1"
         },
         "timestep" : {"init": 0, "ctrl": 20, "asmb": 20},
-        "colormap" : "gray",
+        "colormap" : "Greys",
         "lmode" : "manual",
         "lmin" : 0,
         "lmax" : 1,
@@ -172,7 +172,7 @@
             "units" : "1"
         },
         "timestep" : {"init": 0, "ctrl": 20, "asmb": 20},
-        "colormap" : "gray",
+        "colormap" : "Greys",
         "lmode" : "manual",
         "lmin" : 0,
         "lmax" : 1,
@@ -187,7 +187,7 @@
             "units" : "Pa"
         },
         "timestep" : {"init": 0, "ctrl": 20, "asmb": 20},
-        "colormap" : "coolwarm",
+        "colormap" : "gist_ncar",
         "lmode" : "manual",
         "lmin" : 0,
         "lmax" : 100000,
