@@ -64,7 +64,7 @@ def run(mip_name, config):
                         if var != 'scalar':
                             img_name = '_'.join([var, ice_sheet, group, model, exp]) + '.png'
                             img_file = os.path.relpath(os.path.join(img_dir, img_name), os.getcwd())
-                            
+                           
                             if var_data:
                                 plot_var(var_data, img_file, exp, var, mip)
                             images.append(EL.image(var, 
@@ -205,6 +205,15 @@ def check_var_meta(var, nc_var, data_file, meta):
         if np.isnan(var_data).any():
             message.append('{} contains NaNs in: <br> &emsp; {}'.format(var, data_file))
 
+    ndims = len(var_data.shape)
+    if not ndims:
+        message.append('{} has no dimentions, data could not be read in: <br> &emsp; {}'.format(var, data_file))
+        return (message, None)
+    elif ndims != len(meta['dims']):
+        message.append('{} has  {} dimensions but it should have {} in: <br> &emsp; {}'.format(
+                            var, ndims, len(meta['dims']), data_file))
+        return (message, None)
+
     ncattr = var_data.ncattrs()
     if 'standard_name' not in ncattr:
         message.append('{} missing attribute: "standard_name" in: <br> &emsp; {}'.format(var, data_file))
@@ -214,13 +223,6 @@ def check_var_meta(var, nc_var, data_file, meta):
 
     if 'units' not in ncattr:
         message.append('{} missing attribute: "units" in: <br> &emsp; {}'.format(var, data_file))
-
-    ndims = len(var_data.shape)
-    if not ndims:
-        message.append('{} has no dimentions, data could not be read in: <br> &emsp; {}'.format(var, data_file))
-    elif ndims != len(meta['dims']):
-        message.append('{} has  {} dimensions but it should have {} in: <br> &emsp; {}'.format(
-                            var, ndims, len(meta['dims']), data_file))
 
     return (message, var_data)
 
