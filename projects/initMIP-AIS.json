@@ -7,12 +7,27 @@
             "units" : "kg m-2 s-1"
         },
         "timestep" : {"init": 0, "ctrl": 20, "asmb": 20},
-        "palette" : "WhiteBlueGreenYellowRed",
-        "levelmode" : 2,
+        "colormap" : "gist_ncar",
+        "lmode" : "explicit",
         "lmin" : 0,
         "lmax" : 0,
         "lstep": 0,
-        "levels" : "(/-2e-3,-1e-3,-5e-4,-2e-4,-1e-4,-5e-5,-2e-5,-1e-5,0,5e-6,1e-5,1.5e-5,2e-5,2.5e-5,3e-5,3.5e-5,4e-5,4.5e-5/)"
+        "levels" : [-2e-3,-1e-3,-5e-4,-2e-4,-1e-4,-5e-5,-2e-5,-1e-5,0,5e-6,1e-5,1.5e-5,2e-5,2.5e-5,3e-5,3.5e-5,4e-5,4.5e-5]
+    },
+    "base" : {
+        "meta" : {
+            "dims" : ["t", "y", "x"],
+            "type" : "ST",
+            "standard_name" : "base_altitude",
+            "units" : "m"
+        },
+        "timestep" : {"init": 0, "ctrl": 20, "asmb": 20},
+        "colormap" : "gist_ncar",
+        "lmode" : "manual",
+        "lmin" : -3000,
+        "lmax" : 3000,
+        "lstep": 200,
+        "levels" : [0]
     },
     "dlithkdt" : {
         "meta" : {
@@ -22,12 +37,12 @@
             "units" : "m s-1"
         },
         "timestep" : {"init": 0, "ctrl": 20, "asmb": 20},
-        "palette" : "WhiteBlueGreenYellowRed",
-        "levelmode" : 0,
+        "colormap" : "gist_ncar",
+        "lmode" : "auto",
         "lmin" : 0,
         "lmax" : 0,
         "lstep": 0,
-        "levels" : "(/0/)"
+        "levels" : [0]
     },
     "hfgeoubed" : {
         "meta" : {
@@ -37,12 +52,12 @@
             "units" : "W m-2"
         },
         "timestep" : {"init": 0, "ctrl": 20, "asmb": 20},
-        "palette" : "WhiteBlueGreenYellowRed",
-        "levelmode" : 0,
+        "colormap" : "gist_ncar",
+        "lmode" : "auto",
         "lmin" : 0,
         "lmax" : 0,
         "lstep": 0,
-        "levels" : "(/0/)"
+        "levels" : [0]
     },
     "libmassbf" : {
         "meta" : {
@@ -52,12 +67,12 @@
             "units" : "kg m-2 s-1"
         },
         "timestep" : {"init": 0, "ctrl": 20, "asmb": 20},
-        "palette" : "GMT_wysiwygcont",
-        "levelmode" : 0,
+        "colormap" : "gist_rainbow",
+        "lmode" : "auto",
         "lmin" : 0,
         "lmax" : 0,
         "lstep": 0,
-        "levels" : "(/0/)"
+        "levels" : [0]
     },
     "licalvf" : {
         "meta" : {
@@ -67,12 +82,27 @@
             "units" : "kg m-2 s-1"
         },
         "timestep" : {"init": 0, "ctrl": 20, "asmb": 20},
-        "palette" : "GMT_wysiwygcont",
-        "levelmode" : 0,
+        "colormap" : "gist_rainbow",
+        "lmode" : "auto",
         "lmin" : 0,
         "lmax" : 0,
         "lstep": 0,
-        "levels" : "(/0/)"
+        "levels" : [0]
+    },
+    "ligroundf" : {
+        "meta" : {
+            "dims" : ["t", "y", "x"],
+            "type" : "FL",
+            "standard_name" : "land_ice_specific_mass_flux_due_at_grounding_line",
+            "units" : "kg m-2 s-1"
+        },
+        "timestep" : {"init": 0, "ctrl": 20, "asmb": 20},
+        "colormap" : "gist_rainbow",
+        "lmode" : "auto",
+        "lmin" : 0,
+        "lmax" : 0,
+        "lstep": 0,
+        "levels" : [0]
     },
     "litempbot" : {
         "meta" : {
@@ -82,12 +112,12 @@
             "units" : "K"
         },
         "timestep" : {"init": 0, "ctrl": 20, "asmb": 20},
-        "palette" : "WhiteBlueGreenYellowRed",
-        "levelmode" : 1,
+        "colormap" : "gist_ncar",
+        "lmode" : "manual",
         "lmin" : 240,
         "lmax" : 272,
         "lstep": 2,
-        "levels" : "(/0/)"
+        "levels" : [0]
     },
     "litempsnic" : {
         "meta" : {
@@ -97,12 +127,12 @@
             "units" : "K"
         },
         "timestep" : {"init": 0, "ctrl": 20, "asmb": 20},
-        "palette" : "WhiteBlueGreenYellowRed",
-        "levelmode" : 1,
+        "colormap" : "gist_ncar",
+        "lmode" : "manual",
         "lmin" : 240,
         "lmax" : 272,
         "lstep": 2,
-        "levels" : "(/0/)"
+        "levels" : [0]
     },
     "lithk" : {
         "meta" : {
@@ -112,12 +142,12 @@
             "units" : "m"
         },
         "timestep" : {"init": 0, "ctrl": 20, "asmb": 20},
-        "palette" : "WhiteBlueGreenYellowRed",
-        "levelmode" : 1,
+        "colormap" : "gist_ncar",
+        "lmode" : "manual",
         "lmin" : 0,
         "lmax" : 3000,
-        "lstep": 0,
-        "levels" : "(/0/)"
+        "lstep": 100,
+        "levels" : [0]
     },
     "orog" : {
         "meta" : {
@@ -127,12 +157,12 @@
             "units" : "m"
         },
         "timestep" : {"init": 0, "ctrl": 20, "asmb": 20},
-        "palette" : "WhiteBlueGreenYellowRed",
-        "levelmode" : 1,
+        "colormap" : "gist_ncar",
+        "lmode" : "manual",
         "lmin" : 0,
         "lmax" : 3000,
-        "lstep": 0,
-        "levels" : "(/0/)"
+        "lstep": 100,
+        "levels" : [0]
     },
     "sftflf" : {
         "meta" : {
@@ -142,12 +172,12 @@
             "units" : "1"
         },
         "timestep" : {"init": 0, "ctrl": 20, "asmb": 20},
-        "palette" : "MPL_Greys",
-        "levelmode" : 1,
+        "colormap" : "Greys",
+        "lmode" : "manual",
         "lmin" : 0,
         "lmax" : 1,
         "lstep": 0.1,
-        "levels" : "(/0/)"
+        "levels" : [0]
     },
     "sftgif" : {
         "meta" : {
@@ -157,12 +187,12 @@
             "units" : "1"
         },
         "timestep" : {"init": 0, "ctrl": 20, "asmb": 20},
-        "palette" : "MPL_Greys",
-        "levelmode" : 1,
+        "colormap" : "Greys",
+        "lmode" : "manual",
         "lmin" : 0,
         "lmax" : 1,
         "lstep": 0.1,
-        "levels" : "(/0/)"
+        "levels" : [0]
     },
     "sftgrf" : {
         "meta" : {
@@ -172,12 +202,12 @@
             "units" : "1"
         },
         "timestep" : {"init": 0, "ctrl": 20, "asmb": 20},
-        "palette" : "MPL_Greys",
-        "levelmode" : 1,
+        "colormap" : "Greys",
+        "lmode" : "manual",
         "lmin" : 0,
         "lmax" : 1,
         "lstep": 0.1,
-        "levels" : "(/0/)"
+        "levels" : [0]
     },
     "strbasemag" : {
         "meta" : {
@@ -187,12 +217,12 @@
             "units" : "Pa"
         },
         "timestep" : {"init": 0, "ctrl": 20, "asmb": 20},
-        "palette" : "WhiteBlueGreenYellowRed",
-        "levelmode" : 1,
+        "colormap" : "gist_ncar",
+        "lmode" : "manual",
         "lmin" : 0,
         "lmax" : 100000,
         "lstep": 10000,
-        "levels" : "(/0/)"
+        "levels" : [0]
     },
     "topg" : {
         "meta" : {
@@ -202,12 +232,12 @@
             "units" : "m"
         },
         "timestep" : {"init": 0, "ctrl": 20, "asmb": 20},
-        "palette" : "GMT_relief",
-        "levelmode" : 1,
+        "colormap" : "terrain",
+        "lmode" : "manual",
         "lmin" : -3000,
         "lmax" : 3000,
         "lstep": 200,
-        "levels" : "(/0/)"
+        "levels" : [0]
     },
     "uvelbase" : {
         "meta" : {
@@ -217,12 +247,12 @@
             "units" : "m s-1"
         },
         "timestep" : {"init": 0, "ctrl": 20, "asmb": 20},
-        "palette" : "MPL_BrBG",
-        "levelmode" : 2,
+        "colormap" : "BrBG",
+        "lmode" : "explicit",
         "lmin" : 0,
         "lmax" : 0,
         "lstep": 0,
-        "levels" : "(/-1e-5,-3e-6,-1e-6,-3e-7,-1e-7,-3e-8,-1e-8,-3e-9,0,1e-9,3e-9,1e-8,3e-8,1e-7,3e-7,1e-6,3e-6,1e-5/)"
+        "levels" : [-1e-5,-3e-6,-1e-6,-3e-7,-1e-7,-3e-8,-1e-8,-3e-9,0,1e-9,3e-9,1e-8,3e-8,1e-7,3e-7,1e-6,3e-6,1e-5]
     },
     "uvelmean" : {
         "meta" : {
@@ -232,12 +262,12 @@
             "units" : "m s-1"
         },
         "timestep" : {"init": 0, "ctrl": 20, "asmb": 20},
-        "palette" : "MPL_BrBG",
-        "levelmode" : 2,
+        "colormap" : "BrBG",
+        "lmode" : "explicit",
         "lmin" : 0,
         "lmax" : 0,
         "lstep": 0,
-        "levels" : "(/-1e-5,-3e-6,-1e-6,-3e-7,-1e-7,-3e-8,-1e-8,-3e-9,0,1e-9,3e-9,1e-8,3e-8,1e-7,3e-7,1e-6,3e-6,1e-5/)"
+        "levels" : [-1e-5,-3e-6,-1e-6,-3e-7,-1e-7,-3e-8,-1e-8,-3e-9,0,1e-9,3e-9,1e-8,3e-8,1e-7,3e-7,1e-6,3e-6,1e-5]
     },
     "uvelsurf" : {
         "meta" : {
@@ -247,12 +277,12 @@
             "units" : "m s-1"
         },
         "timestep" : {"init": 0, "ctrl": 20, "asmb": 20},
-        "palette" : "MPL_BrBG",
-        "levelmode" : 2,
+        "colormap" : "BrBG",
+        "lmode" : "explicit",
         "lmin" : 0,
         "lmax" : 0,
         "lstep": 0,
-        "levels" : "(/-1e-5,-3e-6,-1e-6,-3e-7,-1e-7,-3e-8,-1e-8,-3e-9,0,1e-9,3e-9,1e-8,3e-8,1e-7,3e-7,1e-6,3e-6,1e-5/)"
+        "levels" : [-1e-5,-3e-6,-1e-6,-3e-7,-1e-7,-3e-8,-1e-8,-3e-9,0,1e-9,3e-9,1e-8,3e-8,1e-7,3e-7,1e-6,3e-6,1e-5]
     },
     "vvelbase" : {
         "meta" : {
@@ -262,12 +292,12 @@
             "units" : "m s-1"
         },
         "timestep" : {"init": 0, "ctrl": 20, "asmb": 20},
-        "palette" : "MPL_BrBG",
-        "levelmode" : 2,
+        "colormap" : "BrBG",
+        "lmode" : "explicit",
         "lmin" : 0,
         "lmax" : 0,
         "lstep": 0,
-        "levels" : "(/-1e-5,-3e-6,-1e-6,-3e-7,-1e-7,-3e-8,-1e-8,-3e-9,0,1e-9,3e-9,1e-8,3e-8,1e-7,3e-7,1e-6,3e-6,1e-5/)"
+        "levels" : [-1e-5,-3e-6,-1e-6,-3e-7,-1e-7,-3e-8,-1e-8,-3e-9,0,1e-9,3e-9,1e-8,3e-8,1e-7,3e-7,1e-6,3e-6,1e-5]
     },
     "vvelmean" : {
         "meta" : {
@@ -277,12 +307,12 @@
             "units" : "m s-1"
         },
         "timestep" : {"init": 0, "ctrl": 20, "asmb": 20},
-        "palette" : "MPL_BrBG",
-        "levelmode" : 2,
+        "colormap" : "BrBG",
+        "lmode" : "explicit",
         "lmin" : 0,
         "lmax" : 0,
         "lstep": 0,
-        "levels" : "(/-1e-5,-3e-6,-1e-6,-3e-7,-1e-7,-3e-8,-1e-8,-3e-9,0,1e-9,3e-9,1e-8,3e-8,1e-7,3e-7,1e-6,3e-6,1e-5/)"
+        "levels" : [-1e-5,-3e-6,-1e-6,-3e-7,-1e-7,-3e-8,-1e-8,-3e-9,0,1e-9,3e-9,1e-8,3e-8,1e-7,3e-7,1e-6,3e-6,1e-5]
     },
     "vvelsurf" : {
         "meta" : {
@@ -292,12 +322,12 @@
             "units" : "m s-1"
         },
         "timestep" : {"init": 0, "ctrl": 20, "asmb": 20},
-        "palette" : "MPL_BrBG",
-        "levelmode" : 2,
+        "colormap" : "BrBG",
+        "lmode" : "explicit",
         "lmin" : 0,
         "lmax" : 0,
         "lstep": 0,
-        "levels" : "(/-1e-5,-3e-6,-1e-6,-3e-7,-1e-7,-3e-8,-1e-8,-3e-9,0,1e-9,3e-9,1e-8,3e-8,1e-7,3e-7,1e-6,3e-6,1e-5/)"
+        "levels" : [-1e-5,-3e-6,-1e-6,-3e-7,-1e-7,-3e-8,-1e-8,-3e-9,0,1e-9,3e-9,1e-8,3e-8,1e-7,3e-7,1e-6,3e-6,1e-5]
     },
     "wvelbase" : {
         "meta" : {
@@ -307,12 +337,12 @@
             "units" : "m s-1"
         },
         "timestep" : {"init": 0, "ctrl": 20, "asmb": 20},
-        "palette" : "BlueWhiteOrangeRed",
-        "levelmode" : 2,
+        "colormap" : "RdYlBu_r",
+        "lmode" : "explicit",
         "lmin" : 0,
         "lmax" : 0,
         "lstep": 0,
-        "levels" : "(/-1e-5,-3e-6,-1e-6,-3e-7,-1e-7,-3e-8,-1e-8,-3e-9,-1e-9,-3e-10,-1e-10,0,1e-10,3e-10,1e-9,3e-9,1e-8,3e-8,1e-7,3e-7,1e-6,3e-6,1e-5/)"
+        "levels" : [-1e-5,-3e-6,-1e-6,-3e-7,-1e-7,-3e-8,-1e-8,-3e-9,-1e-9,-3e-10,-1e-10,0,1e-10,3e-10,1e-9,3e-9,1e-8,3e-8,1e-7,3e-7,1e-6,3e-6,1e-5]
     },
     "wvelsurf" : {
         "meta" : {
@@ -322,12 +352,12 @@
             "units" : "m s-1"
         },
         "timestep" : {"init": 0, "ctrl": 20, "asmb": 20},
-        "palette" : "BlueWhiteOrangeRed",
-        "levelmode" : 2,
+        "colormap" : "RdYlBu_r",
+        "lmode" : "explicit",
         "lmin" : 0,
         "lmax" : 0,
         "lstep": 0,
-        "levels" : "(/-1e-5,-3e-6,-1e-6,-3e-7,-1e-7,-3e-8,-1e-8,-3e-9,0,1e-9,3e-9,1e-8,3e-8,1e-7,3e-7,1e-6,3e-6,1e-5/)"
+        "levels" : [-1e-5,-3e-6,-1e-6,-3e-7,-1e-7,-3e-8,-1e-8,-3e-9,0,1e-9,3e-9,1e-8,3e-8,1e-7,3e-7,1e-6,3e-6,1e-5]
     },
     "scalar" : {
         "lim" : {
