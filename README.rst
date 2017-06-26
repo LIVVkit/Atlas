@@ -85,9 +85,12 @@ Usage
 You can work from any directory, but all paths in the JSON configuration files must be edited to
 absolute paths or relative paths from your current working directory (not recommended).* 
 
-Atlas is controlled by a JSON configuration file which describes the submission, which ISMIP6
-Project the submission is for. For example, to test the PISM5KM submission to initMIP Greenland by
-the ARC modeling group, the JSON file would look like:
+Atlas is controlled by a JSON configuration file which describes the submission and which ISMIP6
+Project the submission is for. A number of example JSON configuration files are contained in the
+`examples/` subdirectory. 
+
+For example, using `examples/GIS-ARC-PISM5KM.json` would analyze the PISM5KM submission to initMIP
+Greenland by the ARC modeling group. The JSON configuration file looks like:
 
 .. code-block:: json
 
@@ -103,15 +106,14 @@ the ARC modeling group, the JSON file would look like:
         }
     }
 
-as seen in `atlas-ARC-PISM5KM.json`. This JSON configuration file would then be passed to LIVVkit
-like:  
+and is passed to LIVVkit like:  
 
 .. code-block:: bash
 
-    livv -V atlas-ARC-PISM5KM.json -o results
+    livv -V examples/GIS-ARC-PISM5KM.json -o results
 
-and LIVVkit would produce an website detailing the results of the analysis and the diagnostic plots
-in the `results` directory. This website can then be viewed locally in your favorite web browser. 
+LIVVkit will produce a website detailing the results of the analysis and the diagnostic plots in the
+`results` directory. This website can then be viewed locally in your favorite web browser. 
 
 *Note: if you're having trouble viewing the output or the website appear blank, you're browser may
 be blocking the exectuion of local resources like javascript. See the* `LIVVkit FAQs
@@ -129,9 +131,12 @@ The JSON configuration files are structured as a set of nested dictionaries. The
     }
 
 is used to describe which project the submission is for, where the keys are the (case sensitive)
-name of the project. Atlas will use this name to find an associated project JSON config file which
+name of the project and used to find an associated project config file in the `projects/`
+subdirectory (`ls projects/` will give you a list of supported projects). The project config file
 describes the variables that should be present, the expected metadata for each variable, and the
-plot style for each variable. Multiple projects can be analyzed by having multiple project keys in
+plot style for each variable. 
+
+Multiple projects can be analyzed by having multiple project keys in
 this dictionary. For example:
 
 .. code-block:: json
@@ -187,11 +192,75 @@ the projects, multiple groups can be analyzed at the same time by adding them to
     }
 
 
+`example/GIS-DMI-PISM0-4.json` provides an example of analyzing the submission of multiple model
+versions (`PISM0`, `PISM1`, `PISM2`, `PISM3`, and `PISM4`)  by the `DMI` group to the initMIP
+Greenland project.  
+
+`example/GIS-initMIP.json` provides an example of analyzing all the group-model(s) submissions to
+the initMIP Greenland project, and the file looks like:
+
+.. code-block:: json
+
+    {
+        "initMIP-GIS" : {
+            "module" : "atlas.py",
+            "data_path" : "data/GrIS/output",
+            "groups" : {
+                "ARC" : ["PISM5KM"],
+                "AWI" : ["ISSM1", "ISSM2"],
+                "BGC" : ["BISICLES1", "BISICLES2", "BISICLES3"],
+                "DMI" : ["PISM0", "PISM1", "PISM2", "PISM3", "PISM4", "PISM5"],
+                "ILTS" : ["SICOPOLIS"],
+                "ILTSPIK" : ["SICOPOLIS"], 
+                "IMAU" : ["IMAUICE1", "IMAUICE2", "IMAUICE1"],
+                "JPL" : ["ISSM"],
+                "LANL" : ["CISM"],
+                "LGGE" : ["ELMER1", "ELMER2"],
+                "LSCE" : ["GRISLI"],
+                "MIROC" : ["ICIES1", "ICIES2"],
+                "MPIM" : ["PISM"],
+                "UAF" : ["PISM1", "PISM2", "PISM3", "PISM4", " PISM5", "PISM6"],
+                "UCIJPL" : ["ISSM"],
+                "ULB" : ["FETISH1", "FETISH2"],
+                "VUB" : ["GISM1", "GISM2"]
+            },
+            "experiments": ["init", "ctrl", "asmb"]
+        }
+    }
+
+
+Similarly, `example/AIS-initMIP.json` provides an example of analyzing all the group-model(s)
+submissions to the initMIP Antarctica project.
+
+
 Contributing
 ------------
 
+Contributions are welcome! When developing the code, please use the `Forking Workflow
+<https://www.atlassian.com/git/tutorials/comparing-workflows#forking-workflow>`__ to add
+contributions to Atlas (or LIVVkit). 
+
+First, go to the `Atlas github page <https://github.com/LIVVkit/Atlas>`__ and push the Fork button
+on the top right of the page.  This will create a fork of LIVVkit on your profile page. Clone the
+fork, make your changes, merge them to master branch, and then submit a pull request to our
+repository.
+
+If you have any questions, concerns, requests, etc., open an issue in `our issues queue
+<https://github.com/LIVVkit/Atlas/issues>`__, and we will help you out.
 
 Contact us
 ----------
 
+If you would like to suggest features, request tests, discuss contributions,
+report bugs, ask questions, or contact us for any reason, use the
+`Issue Tracker <https://github.com/LIVVkit/Atlas/issues>`__.
+
+Want to send us a private message?
+
+**Joseph H. Kennedy** 
+* github: @jhkennedy
+* email: <a href="mailto:kennedyjh@ornl.gov">kennedyjh [at] ornl.gov</a>
+
+**Heiko Goelzer** 
+* email: <a href="mailto:h.goelzer@uu.nl">h.goelzer [at] uu.nl</a>
 
