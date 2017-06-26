@@ -257,10 +257,12 @@ report bugs, ask questions, or contact us for any reason, use the
 
 Want to send us a private message?
 
-**Joseph H. Kennedy** 
+**Joseph H. Kennedy**
+
 * github: @jhkennedy
 * email: <a href="mailto:kennedyjh@ornl.gov">kennedyjh [at] ornl.gov</a>
 
 **Heiko Goelzer** 
+
 * email: <a href="mailto:h.goelzer@uu.nl">h.goelzer [at] uu.nl</a>
 
