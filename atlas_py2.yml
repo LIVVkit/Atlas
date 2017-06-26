@@ -8,7 +8,6 @@ dependencies:
 - matplotlib
 - numpy
 - scipy
-- ncl
 - netcdf4
 - netcdf-fortran
 - libnetcdf
