@@ -10,39 +10,43 @@ Installation:
 
 The ISMIP6 Atlas is an extension to `LIVVkit 2.1+ <https://github.com/LIVVkit/LIVVkit>`__, which is
 a python 2 and 3 compatible verification and validation toolkit for ice sheet models. LIVVkit is
-distributed on Both PyPi and Anaconda, and can be installed by following its `installation
-instructions <https://livvkit.github.io/Docs/install.html>`__. 
-
-For ease of use, we recommended using Anaconda/Miniconda to satisfy all the dependencies and setup
-an ISMIP6 Atlas environment. Alternatively, LIVVkit and Atlas can be installed using Python pip. 
+distributed on both Anaconda and PyPi.  For ease of use, we recommended using `Anaconda
+<https://www.continuum.io/downloads>`__/`Miniconda <https://conda.io/docs/install/quick.html>`__ to
+satisfy all the dependencies. Alternatively, LIVVkit can be installed using Python pip. 
 
 Anaconda/Miniconda
 ~~~~~~~~~~~~~~~~~~
 
 Once you have `Anaconda <https://www.continuum.io/downloads>`__/`Miniconda
-<https://conda.io/docs/install/quick.html>`__ installed on your system, you can create an Atlas
-`conda` environment from one of the provided YAML environment descriptions:
+<https://conda.io/docs/install/quick.html>`__ installed on your system, you can:
 
-* `atlas_py3.yml`: (Recommended) A Python 3 based `conda` environment, including all the required
-  dependencies.  Create the environment by issuing these commands:
-
-.. code-block:: bash
-    
-    conda create -f atlas_py3.yml
-
-
-* `atlas_py2.yml`: A Python 2 based `conda` environment, including all the required dependencies.
-  Create the environment by issuing these commands:
+* Update an existing Python 2 or 3 `conda` environment, adding all the required dependencies, by
+  issuing this command:
 
 .. code-block:: bash
     
-    conda create -f atlas_py2.yml
+    conda install -c jhkennedy livvkit
 
-Once the environment is setup, activate it by issuing this command:
+* Create a **new** Python 3 based `conda` environment, including all the required dependencies, by
+  issuing this command:
+
+.. code-block:: bash
+    
+    conda create -c jhkennedy --name atlas python=3 livvkit
+
+
+* Create a new Python 2 based `conda` environment, including all the required dependencies, by
+  issuing this command:
+
+.. code-block:: bash
+    
+    conda create -c jhkennedy --name atlas python=2 livvkit
+
+If you've created a new environment, you can activate it by issuing this command:
 
 .. code-block:: bash
 
-    source deactivate && source activate Atlas
+    source deactivate && source activate atlas
 
 Python pip
 ~~~~~~~~~~
@@ -110,14 +114,14 @@ and is passed to LIVVkit like:
 
 .. code-block:: bash
 
-    livv -V examples/GIS-ARC-PISM5KM.json -o results
+    livv -e examples/GIS-ARC-PISM5KM.json -o results --serve
 
-LIVVkit will produce a website detailing the results of the analysis and the diagnostic plots in the
-`results` directory. This website can then be viewed locally in your favorite web browser. 
+LIVVkit will produce a website detailing the results of the analysis, including the diagnostic
+plots, in the `results` directory. The ``--serve`` option will fire up a http server and print the
+http address viewing the local website in your favorite web browser.  
 
-*Note: if you're having trouble viewing the output or the website appear blank, you're browser may
-be blocking the exectuion of local resources like javascript. See the* `LIVVkit FAQs
-<https://livvkit.github.io/Docs/faq.html>`__ *for a workaround.* 
+*Note: See the* `LIVVkit FAQs <https://livvkit.github.io/Docs/faq.html>`__ *for a discussion of the
+``--serve`` option.* 
 
 The configuration files
 -----------------------
