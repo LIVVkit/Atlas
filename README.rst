@@ -120,8 +120,8 @@ LIVVkit will produce a website detailing the results of the analysis, including 
 plots, in the `results` directory. The ``--serve`` option will fire up a http server and print the
 http address viewing the local website in your favorite web browser.  
 
-*Note: See the* `LIVVkit FAQs <https://livvkit.github.io/Docs/faq.html>`__ *for a discussion of the
-``--serve`` option.* 
+*Note: See the* `LIVVkit FAQs <https://livvkit.github.io/Docs/faq.html>`__ *for a discussion of the*
+``--serve`` *option.* 
 
 The configuration files
 -----------------------
