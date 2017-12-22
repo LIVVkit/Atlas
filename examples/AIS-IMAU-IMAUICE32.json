@@ -1,0 +1,10 @@
+{
+    "initMIP-AIS" : {
+        "module" : "atlas.py",
+        "data_path" : "data",
+        "groups" : {
+            "IMAU" :  ["IMAUICE32"]
+        },
+        "experiments": ["init", "ctrl", "asmb", "abmb"]
+    }
+}

@@ -66,7 +66,7 @@ def run(mip_name, config):
                             img_file = os.path.relpath(os.path.join(img_dir, img_name), os.getcwd())
                            
                             if var_data:
-                                plot_var(var_data, img_file, exp, var, mip)
+                                plot_var(var_data, img_file, exp, var, mip, ice_sheet)
                             images.append(EL.image(var, 
                                                    mip[var]['meta']['standard_name'].replace('_',' '), 
                                                    '/'.join([mip_name, img_name]) ))
@@ -90,7 +90,7 @@ def run(mip_name, config):
     return EL.book(mip_name, __doc__, page_dict=pages) 
 
 
-def plot_var(var_data, img_file, exp, var, mip):
+def plot_var(var_data, img_file, exp, var, mip, ice_sheet):
     """
     Plot a variable from a netCDF Dataset following the MIP configuration. 
 
@@ -106,7 +106,10 @@ def plot_var(var_data, img_file, exp, var, mip):
     tstep = mip[var]['timestep'][exp]
     cmap = mip[var]['colormap']
 
-    fig, ax = plt.subplots(1,1, figsize=(5,8), dpi=100)
+    if "AIS" in ice_sheet:
+        fig, ax = plt.subplots(1, 1, figsize=(8, 8), dpi=100)
+    else:
+        fig, ax = plt.subplots(1,1, figsize=(5,8), dpi=100)
     plt.rc('text', usetex=True)
     plt.rc('font', family='serif')
 

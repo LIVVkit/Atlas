@@ -6,13 +6,13 @@
             "standard_name" : "land_ice_surface_specific_mass_balance_flux",
             "units" : "kg m-2 s-1"
         },
-        "timestep" : {"init": 0, "ctrl": 20, "asmb": 20},
+        "timestep" : {"init": 0, "ctrl": 20, "asmb": 20, "abmb": 20},
         "colormap" : "gist_ncar",
-        "lmode" : "explicit",
+        "lmode" : "manual",
         "lmin" : 0,
-        "lmax" : 0,
-        "lstep": 0,
-        "levels" : [-2e-3,-1e-3,-5e-4,-2e-4,-1e-4,-5e-5,-2e-5,-1e-5,0,5e-6,1e-5,1.5e-5,2e-5,2.5e-5,3e-5,3.5e-5,4e-5,4.5e-5]
+        "lmax" : 0.0002,
+        "lstep": 0.000005,
+        "levels" : [0]
     },
     "base" : {
         "meta" : {
@@ -21,7 +21,7 @@
             "standard_name" : "base_altitude",
             "units" : "m"
         },
-        "timestep" : {"init": 0, "ctrl": 20, "asmb": 20},
+        "timestep" : {"init": 0, "ctrl": 20, "asmb": 20, "abmb": 20},
         "colormap" : "gist_ncar",
         "lmode" : "manual",
         "lmin" : -3000,
@@ -36,7 +36,7 @@
             "standard_name" : "tendency_of_land_ice_thickness",
             "units" : "m s-1"
         },
-        "timestep" : {"init": 0, "ctrl": 20, "asmb": 20},
+        "timestep" : {"init": 0, "ctrl": 20, "asmb": 20, "abmb": 20},
         "colormap" : "gist_ncar",
         "lmode" : "auto",
         "lmin" : 0,
@@ -51,7 +51,7 @@
             "standard_name" : "upward_geothermal_heat_flux_at_ground_level",
             "units" : "W m-2"
         },
-        "timestep" : {"init": 0, "ctrl": 20, "asmb": 20},
+        "timestep" : {"init": 0, "ctrl": 20, "asmb": 20, "abmb": 20},
         "colormap" : "gist_ncar",
         "lmode" : "auto",
         "lmin" : 0,
@@ -66,7 +66,7 @@
             "standard_name" : "land_ice_basal_specific_mass_balance_flux",
             "units" : "kg m-2 s-1"
         },
-        "timestep" : {"init": 0, "ctrl": 20, "asmb": 20},
+        "timestep" : {"init": 0, "ctrl": 20, "asmb": 20, "abmb": 20},
         "colormap" : "gist_rainbow",
         "lmode" : "auto",
         "lmin" : 0,
@@ -81,7 +81,7 @@
             "standard_name" : "land_ice_specific_mass_flux_due_to_calving",
             "units" : "kg m-2 s-1"
         },
-        "timestep" : {"init": 0, "ctrl": 20, "asmb": 20},
+        "timestep" : {"init": 0, "ctrl": 20, "asmb": 20, "abmb": 20},
         "colormap" : "gist_rainbow",
         "lmode" : "auto",
         "lmin" : 0,
@@ -93,10 +93,10 @@
         "meta" : {
             "dims" : ["t", "y", "x"],
             "type" : "FL",
-            "standard_name" : "land_ice_specific_mass_flux_due_at_grounding_line",
+            "standard_name" : "land_ice_specific_mass_flux_at_grounding_line",
             "units" : "kg m-2 s-1"
         },
-        "timestep" : {"init": 0, "ctrl": 20, "asmb": 20},
+        "timestep" : {"init": 0, "ctrl": 20, "asmb": 20, "abmb": 20},
         "colormap" : "gist_rainbow",
         "lmode" : "auto",
         "lmin" : 0,
@@ -111,7 +111,7 @@
             "standard_name" : "land_ice_basal_temperature",
             "units" : "K"
         },
-        "timestep" : {"init": 0, "ctrl": 20, "asmb": 20},
+        "timestep" : {"init": 0, "ctrl": 20, "asmb": 20, "abmb": 20},
         "colormap" : "gist_ncar",
         "lmode" : "manual",
         "lmin" : 240,
@@ -126,10 +126,10 @@
             "standard_name" : "temperature_at_ground_level_in_snow_or_firn",
             "units" : "K"
         },
-        "timestep" : {"init": 0, "ctrl": 20, "asmb": 20},
+        "timestep" : {"init": 0, "ctrl": 20, "asmb": 20, "abmb": 20},
         "colormap" : "gist_ncar",
         "lmode" : "manual",
-        "lmin" : 240,
+        "lmin" : 200,
         "lmax" : 272,
         "lstep": 2,
         "levels" : [0]
@@ -141,7 +141,7 @@
             "standard_name" : "land_ice_thickness",
             "units" : "m"
         },
-        "timestep" : {"init": 0, "ctrl": 20, "asmb": 20},
+        "timestep" : {"init": 0, "ctrl": 20, "asmb": 20, "abmb": 20},
         "colormap" : "gist_ncar",
         "lmode" : "manual",
         "lmin" : 0,
@@ -156,11 +156,11 @@
             "standard_name" : "surface_altitude",
             "units" : "m"
         },
-        "timestep" : {"init": 0, "ctrl": 20, "asmb": 20},
+        "timestep" : {"init": 0, "ctrl": 20, "asmb": 20, "abmb": 20},
         "colormap" : "gist_ncar",
         "lmode" : "manual",
         "lmin" : 0,
-        "lmax" : 3000,
+        "lmax" : 4000,
         "lstep": 100,
         "levels" : [0]
     },
@@ -171,7 +171,7 @@
             "standard_name" : "floating_ice_sheet_area_fraction",
             "units" : "1"
         },
-        "timestep" : {"init": 0, "ctrl": 20, "asmb": 20},
+        "timestep" : {"init": 0, "ctrl": 20, "asmb": 20, "abmb": 20},
         "colormap" : "Greys",
         "lmode" : "manual",
         "lmin" : 0,
@@ -186,7 +186,7 @@
             "standard_name" : "land_ice_area_fraction",
             "units" : "1"
         },
-        "timestep" : {"init": 0, "ctrl": 20, "asmb": 20},
+        "timestep" : {"init": 0, "ctrl": 20, "asmb": 20, "abmb": 20},
         "colormap" : "Greys",
         "lmode" : "manual",
         "lmin" : 0,
@@ -201,7 +201,7 @@
             "standard_name" : "grounded_ice_sheet_area_fraction",
             "units" : "1"
         },
-        "timestep" : {"init": 0, "ctrl": 20, "asmb": 20},
+        "timestep" : {"init": 0, "ctrl": 20, "asmb": 20, "abmb": 20},
         "colormap" : "Greys",
         "lmode" : "manual",
         "lmin" : 0,
@@ -216,7 +216,7 @@
             "standard_name" : "magnitude_of_land_ice_basal_drag",
             "units" : "Pa"
         },
-        "timestep" : {"init": 0, "ctrl": 20, "asmb": 20},
+        "timestep" : {"init": 0, "ctrl": 20, "asmb": 20, "abmb": 20},
         "colormap" : "gist_ncar",
         "lmode" : "manual",
         "lmin" : 0,
@@ -231,12 +231,12 @@
             "standard_name" : "bedrock_altitude",
             "units" : "m"
         },
-        "timestep" : {"init": 0, "ctrl": 20, "asmb": 20},
+        "timestep" : {"init": 0, "ctrl": 20, "asmb": 20, "abmb": 20},
         "colormap" : "terrain",
         "lmode" : "manual",
-        "lmin" : -3000,
-        "lmax" : 3000,
-        "lstep": 200,
+        "lmin" : -8000,
+        "lmax" : 8000,
+        "lstep": 500,
         "levels" : [0]
     },
     "uvelbase" : {
@@ -246,7 +246,7 @@
             "standard_name" : "land_ice_basal_x_velocity",
             "units" : "m s-1"
         },
-        "timestep" : {"init": 0, "ctrl": 20, "asmb": 20},
+        "timestep" : {"init": 0, "ctrl": 20, "asmb": 20, "abmb": 20},
         "colormap" : "BrBG",
         "lmode" : "explicit",
         "lmin" : 0,
@@ -261,7 +261,7 @@
             "standard_name" : "land_ice_vertical_mean_x_velocity",
             "units" : "m s-1"
         },
-        "timestep" : {"init": 0, "ctrl": 20, "asmb": 20},
+        "timestep" : {"init": 0, "ctrl": 20, "asmb": 20, "abmb": 20},
         "colormap" : "BrBG",
         "lmode" : "explicit",
         "lmin" : 0,
@@ -276,7 +276,7 @@
             "standard_name" : "land_ice_surface_x_velocity",
             "units" : "m s-1"
         },
-        "timestep" : {"init": 0, "ctrl": 20, "asmb": 20},
+        "timestep" : {"init": 0, "ctrl": 20, "asmb": 20, "abmb": 20},
         "colormap" : "BrBG",
         "lmode" : "explicit",
         "lmin" : 0,
@@ -291,7 +291,7 @@
             "standard_name" : "land_ice_basal_y_velocity",
             "units" : "m s-1"
         },
-        "timestep" : {"init": 0, "ctrl": 20, "asmb": 20},
+        "timestep" : {"init": 0, "ctrl": 20, "asmb": 20, "abmb": 20},
         "colormap" : "BrBG",
         "lmode" : "explicit",
         "lmin" : 0,
@@ -306,7 +306,7 @@
             "standard_name" : "land_ice_vertical_mean_y_velocity",
             "units" : "m s-1"
         },
-        "timestep" : {"init": 0, "ctrl": 20, "asmb": 20},
+        "timestep" : {"init": 0, "ctrl": 20, "asmb": 20, "abmb": 20},
         "colormap" : "BrBG",
         "lmode" : "explicit",
         "lmin" : 0,
@@ -321,7 +321,7 @@
             "standard_name" : "land_ice_surface_y_velocity",
             "units" : "m s-1"
         },
-        "timestep" : {"init": 0, "ctrl": 20, "asmb": 20},
+        "timestep" : {"init": 0, "ctrl": 20, "asmb": 20, "abmb": 20},
         "colormap" : "BrBG",
         "lmode" : "explicit",
         "lmin" : 0,
@@ -336,7 +336,7 @@
             "standard_name" : "land_ice_basal_upward_velocity",
             "units" : "m s-1"
         },
-        "timestep" : {"init": 0, "ctrl": 20, "asmb": 20},
+        "timestep" : {"init": 0, "ctrl": 20, "asmb": 20, "abmb": 20},
         "colormap" : "RdYlBu_r",
         "lmode" : "explicit",
         "lmin" : 0,
@@ -351,7 +351,7 @@
             "standard_name" : "land_ice_surface_upward_velocity",
             "units" : "m s-1"
         },
-        "timestep" : {"init": 0, "ctrl": 20, "asmb": 20},
+        "timestep" : {"init": 0, "ctrl": 20, "asmb": 20, "abmb": 20},
         "colormap" : "RdYlBu_r",
         "lmode" : "explicit",
         "lmin" : 0,
