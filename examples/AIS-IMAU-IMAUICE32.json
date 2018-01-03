@@ -1,7 +1,7 @@
 {
     "initMIP-AIS" : {
         "module" : "atlas.py",
-        "data_path" : "data",
+        "data_path" : "data/AIS/output",
         "groups" : {
             "IMAU" :  ["IMAUICE32"]
         },
