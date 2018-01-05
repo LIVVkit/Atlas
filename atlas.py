@@ -110,7 +110,7 @@ def plot_var(var_data, img_file, exp, var, mip, ice_sheet):
         fig, ax = plt.subplots(1, 1, figsize=(8, 8), dpi=100)
     else:
         fig, ax = plt.subplots(1,1, figsize=(5,8), dpi=100)
-    plt.rc('text', usetex=True)
+    # plt.rc('text', usetex=True)
     plt.rc('font', family='serif')
 
     if mip[var]['lmode'] == 'auto':
