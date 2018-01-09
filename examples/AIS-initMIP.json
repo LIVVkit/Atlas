@@ -1,7 +1,7 @@
 {
     "initMIP-AIS" : {
         "module" : "atlas.py",
-        "data_path" : "data/GrIS/output",
+        "data_path" : "data/AIS/output",
         "groups" : {
             "ARC" : ["PISM1", "PISM2"],
             "AWI" : ["PISM"],
@@ -14,6 +14,6 @@
             "ULB" : ["FETISH"],
             "VUB" : ["AISMPALEO"]
         },
-        "experiments": ["init", "ctrl", "asmb"]
+        "experiments": ["init", "ctrl", "asmb", "abmb"]
     }
 }

@@ -132,10 +132,10 @@ def plot_var(var_data, img_file, exp, var, mip, ice_sheet):
         else:
             plot_data = var_data[tstep,:,:]
 
-    if lvls is not None:
-        ax.contourf(plot_data, cmap=cmap, levels=lvls)
-    else:
-        ax.contourf(plot_data, cmap=cmap)
+        if lvls is not None:
+            ax.contourf(plot_data, cmap=cmap, levels=lvls)
+        else:
+            ax.contourf(plot_data, cmap=cmap)
         
 
     ax.set_title(var)
@@ -213,7 +213,7 @@ def check_var_meta(var, nc_var, data_file, meta):
 
     ndims = len(var_data.shape)
     if not ndims:
-        message.append('{} has no dimentions, data could not be read in: <br> &emsp; {}'.format(var, data_file))
+        message.append('{} has no dimensions, data could not be read in: <br> &emsp; {}'.format(var, data_file))
         return (message, None)
     elif ndims != len(meta['dims']):
         message.append('{} has  {} dimensions but it should have {} in: <br> &emsp; {}'.format(
@@ -223,8 +223,11 @@ def check_var_meta(var, nc_var, data_file, meta):
     tsteps = var_data.shape[0]
     if meta['timestep'] is not None:
         if tsteps < meta['timestep']+1:
-            message.append('{} should have at least {} time steps but has {} in: <br> &emsp; {}'. format(
-                    var, meta['timestep']+1, tsteps, data_file))
+            message.append(' '.join(['{} should have at least {} time steps but has {} in:',
+                                     ' <br> &emsp; {}<br> &emsp; Note: this often happens when',
+                                     'the final init timestep has not been included as the initial',
+                                     'timestep in the follow-on experiments.']
+                                    ).format(var, meta['timestep']+1, tsteps, data_file))
             return (message, None)
 
     ncattr = var_data.ncattrs()
@@ -233,7 +236,6 @@ def check_var_meta(var, nc_var, data_file, meta):
     elif var_data.getncattr('standard_name') != meta['standard_name']:
         message.append('{} standard name is "{}" but  it should be "{}" in: <br> &emsp; {}'.format(
                            var, var_data.getncattr('standard_name'), meta['standard_name'], data_file))
-
     if 'units' not in ncattr:
         message.append('{} missing attribute: "units" in: <br> &emsp; {}'.format(var, data_file))
 
