@@ -1,5 +1,5 @@
 {
-    "initMIP-GIS" : {
+    "initMIP-AIS" : {
         "module" : "atlas.py",
         "data_path" : "data/GrIS/output",
         "groups" : {

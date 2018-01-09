@@ -58,7 +58,7 @@ def run(mip_name, config):
                         data_name = '_'.join([var, ice_sheet, group, model, exp]) + '.nc'
                         data_file = os.path.relpath(os.path.join(data_dir, data_name), os.getcwd())
                         
-                        msg, var_data, nc_var = check_meta(data_file, var, mip)
+                        msg, var_data, nc_var = check_meta(data_file, exp, var, mip)
                         err_msg.extend(msg)
                         
                         if var != 'scalar':
@@ -100,6 +100,7 @@ def plot_var(var_data, img_file, exp, var, mip, ice_sheet):
         exp: Name of the experiment being analyzed 
         var: Name of the variable to plot
         mip: A dictionary representation of the MIP configuration
+        ice_sheet: Name of the ice sheet being analyzed
 
     Returns: N/A
     """
@@ -122,7 +123,7 @@ def plot_var(var_data, img_file, exp, var, mip, ice_sheet):
         lvls = np.arange(lmin, lmax + lstep, lstep)
     elif mip[var]['lmode'] == 'explicit':
         lvls = mip[var]['levels'] 
-  
+
     # Drop the ResouceWarning for datasets with NaNs
     with warnings.catch_warnings():
         warnings.simplefilter('ignore')
@@ -145,12 +146,13 @@ def plot_var(var_data, img_file, exp, var, mip, ice_sheet):
     plt.close(fig)
 
 
-def check_meta(data_file, var, mip):
+def check_meta(data_file, exp, var, mip):
     """
     Chec the attributes of a variable in a netCDF datafile. 
 
     Args:
         data_file: Path to the NetCDF data file containing the variable's data
+        exp: Name of the experiment being analyzed
         var: Name of the variable to check
         config: A dictionary representation of the MIP configuration
 
@@ -172,10 +174,12 @@ def check_meta(data_file, var, mip):
     if var == 'scalar':
         for v, details in six.iteritems(mip[var]):
             meta = details['meta']
+            meta['timestep'] = None
             msg, var_data = check_var_meta(v, nc_var, data_file, meta)
             message.extend(msg)
     else:
         meta = mip[var]['meta']
+        meta['timestep'] = mip[var]['timestep'][exp]
         msg, var_data = check_var_meta(var, nc_var, data_file, meta)
         message.extend(msg)
         
@@ -194,7 +198,6 @@ def check_var_meta(var, nc_var, data_file, meta):
     Returns: A list of error messages
     """
     message = []
-
     nc_var_actual = [v for v in nc_var.variables]
     if var not in nc_var_actual:
         msg = '{} not found in: <br> &emsp; {}'.format(var, data_file)
@@ -216,6 +219,13 @@ def check_var_meta(var, nc_var, data_file, meta):
         message.append('{} has  {} dimensions but it should have {} in: <br> &emsp; {}'.format(
                             var, ndims, len(meta['dims']), data_file))
         return (message, None)
+
+    tsteps = var_data.shape[0]
+    if meta['timestep'] is not None:
+        if tsteps < meta['timestep']+1:
+            message.append('{} should have at least {} time steps but has {} in: <br> &emsp; {}'. format(
+                    var, meta['timestep']+1, tsteps, data_file))
+            return (message, None)
 
     ncattr = var_data.ncattrs()
     if 'standard_name' not in ncattr:
