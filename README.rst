@@ -78,7 +78,8 @@ To get the ISMIP6 Atlas, either clone it via github:
     git clone https://github.com/LIVVkit/Atlas.git
     cd Atlas
 
-Or download and extract the latest version `https://github.com/LIVVkit/Atlas/archive/master.zip`__
+Or download and extract the latest version from:
+`https://github.com/LIVVkit/Atlas/archive/master.zip <https://github.com/LIVVkit/Atlas/archive/master.zip>`__
 
 Atlas should now be ready to use. 
 
@@ -267,7 +268,7 @@ Contributions are welcome! When developing the code, please use the `Forking Wor
 contributions to Atlas (or LIVVkit). 
 
 First, go to the `Atlas github page <https://github.com/LIVVkit/Atlas>`__ and push the Fork button
-on the top right of the page.  This will create a fork of LIVVkit on your profile page. Clone the
+on the top right of the page.  This will create a fork of Atlas on your profile page. Clone the
 fork, make your changes, merge them to master branch, and then submit a pull request to our
 repository.
 
