@@ -20,14 +20,14 @@ Anaconda/Miniconda
 Once you have `Anaconda <https://www.continuum.io/downloads>`__/`Miniconda
 <https://conda.io/docs/install/quick.html>`__ installed on your system, you can:
 
-* Update an existing Python 2 or 3 `conda` environment, adding all the required dependencies, by
+* Update an existing Python 2 or 3 ``conda`` environment, adding all the required dependencies, by
   issuing this command:
 
 .. code-block:: bash
     
     conda install -c jhkennedy livvkit
 
-* Create a **new** Python 3 based `conda` environment, including all the required dependencies, by
+* Create a **new** Python 3 based ``conda`` environment, including all the required dependencies, by
   issuing this command:
 
 .. code-block:: bash
@@ -35,7 +35,7 @@ Once you have `Anaconda <https://www.continuum.io/downloads>`__/`Miniconda
     conda create -c jhkennedy --name atlas python=3 livvkit
 
 
-* Create a new Python 2 based `conda` environment, including all the required dependencies, by
+* Create a new Python 2 based ``conda`` environment, including all the required dependencies, by
   issuing this command:
 
 .. code-block:: bash
@@ -59,10 +59,10 @@ system, you'll need to install:
 * HDF5
 * NetCDF4 with HDF4 support
 
-This will be much easier if you use a package manager (e.g., `yum`, `apt`, `brew`, `macports`; see `here for
+This will be much easier if you use a package manager (e.g., ``yum``, ``apt``, ``brew``, ``macports``; see `here for
 macs <http://alejandrosoto.net/blog/2016/08/16/setting-up-my-mac-for-climate-research/>`__).
 
-Then, install LIVVkit via `pip`:
+Then, install LIVVkit via ``pip``:
 
 .. code-block:: bash
 
@@ -91,9 +91,9 @@ absolute paths or relative paths from your current working directory (not recomm
 
 Atlas is controlled by a JSON configuration file which describes the submission and which ISMIP6
 Project the submission is for. A number of example JSON configuration files are contained in the
-`examples/` subdirectory. 
+``examples/`` subdirectory.
 
-For example, using `examples/GIS-ARC-PISM5KM.json` would analyze the PISM5KM submission to initMIP
+For example, using ``examples/GIS-ARC-PISM5KM.json`` would analyze the PISM5KM submission to initMIP
 Greenland by the ARC modeling group. The JSON configuration file looks like:
 
 .. code-block:: json
@@ -117,7 +117,7 @@ and is passed to LIVVkit like:
     livv -e examples/GIS-ARC-PISM5KM.json -o results --serve
 
 LIVVkit will produce a website detailing the results of the analysis, including the diagnostic
-plots, in the `results` directory. The ``--serve`` option will fire up a http server and print the
+plots, in the ``results`` directory. The ``--serve`` option will fire up a http server and print the
 http address viewing the local website in your favorite web browser.  
 
 *Note: See the* `LIVVkit FAQs <https://livvkit.github.io/Docs/faq.html>`__ *for a discussion of the*
@@ -135,8 +135,8 @@ The JSON configuration files are structured as a set of nested dictionaries. The
     }
 
 is used to describe which project the submission is for, where the keys are the (case sensitive)
-name of the project and used to find an associated project config file in the `projects/`
-subdirectory (`ls projects/` will give you a list of supported projects). The project config file
+name of the project and used to find an associated project config file in the ``projects/``
+subdirectory (``ls projects/`` will give you a list of supported projects). The project config file
 describes the variables that should be present, the expected metadata for each variable, and the
 plot style for each variable. 
 
@@ -163,11 +163,11 @@ Will analyze initMIP submission for both Greenland and Antarctica. The nested pr
         }
     }
 
-describes what LIVVkit extension module to use for the analysis (always `"atlas.py"`), a directory
+describes what LIVVkit extension module to use for the analysis (always ``"atlas.py"``), a directory
 containing the submission data (either a path relative to the working directory, or an absolute
-path), the names of the experiments run for that project, and a nested `"groups"` dictionary. 
+path), the names of the experiments run for that project, and a nested ``"groups"`` dictionary.
 
-The nested `"groups"` dictionary: 
+The nested ``"groups"`` dictionary:
 
 .. code-block:: json
 
@@ -196,11 +196,11 @@ the projects, multiple groups can be analyzed at the same time by adding them to
     }
 
 
-`example/GIS-DMI-PISM0-4.json` provides an example of analyzing the submission of multiple model
-versions (`PISM0`, `PISM1`, `PISM2`, `PISM3`, and `PISM4`)  by the `DMI` group to the initMIP
+``example/GIS-DMI-PISM0-4.json`` provides an example of analyzing the submission of multiple model
+versions (``PISM0``, ``PISM1``, ``PISM2``, ``PISM3``, and ``PISM4``)  by the ``DMI`` group to the initMIP
 Greenland project.  
 
-`example/GIS-initMIP.json` provides an example of analyzing all the group-model(s) submissions to
+``example/GIS-initMIP.json`` provides an example of analyzing all the group-model(s) submissions to
 the initMIP Greenland project, and the file looks like:
 
 .. code-block:: json
@@ -233,9 +233,31 @@ the initMIP Greenland project, and the file looks like:
     }
 
 
-Similarly, `example/AIS-initMIP.json` provides an example of analyzing all the group-model(s)
+Similarly, ``example/AIS-initMIP.json`` provides an example of analyzing all the group-model(s)
 submissions to the initMIP Antarctica project.
 
+Finally, there is also an optional ``strict`` key which can be given in the nested project dictionary like:
+
+.. code-block:: json
+
+    {
+        "initMIP-GIS" : {
+            "module" : "atlas.py",
+            "data_path" : "data/GrIS/output",
+            "groups" : {...},
+            "experiments": ["init", "ctrl", "asmb"],
+            "strict": true
+        }
+    }
+
+This will prevent Atlas from making "fuzzy" decisions around common submission problems in order to
+provide more information in its output website. For example, in the follow on experiments (like ``ctrl``),
+modeling groups commonly didn't include the ``init`` submission as the zero-th time step in the model
+output as requested. In this case, Atlas will notice there aren't enough time steps in a variable file,
+output a Meta Check error indicating missing time step, and either:
+
+* plot the *last* time step in the variable file if there is no ``strict`` key or if ``"strict": false`` is given
+* not attempt to plot the variable if ``"strict": true`` is given.
 
 Contributing
 ------------

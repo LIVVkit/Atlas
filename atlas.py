@@ -18,7 +18,7 @@ from livvkit.util import elements as EL
 from livvkit.util import functions as FN
 
 _DEBUG = False
-
+_STRICT = False
 
 def mip_config(mip_name):
     mip_path = os.path.dirname(os.path.abspath(__file__))
@@ -40,6 +40,14 @@ def run(mip_name, config):
     mip = mip_config(mip_name)
     img_dir = os.path.join(livvkit.output_dir, 'validation', 'imgs', mip_name)
     FN.mkdir_p(img_dir)
+
+    try:
+        if config['strict']:
+            global _STRICT
+            _STRICT = True
+    except KeyError:
+        pass
+
 
     pages = {}
     for group in config['groups']:
@@ -107,10 +115,13 @@ def plot_var(var_data, img_file, exp, var, mip, ice_sheet):
     tstep = mip[var]['timestep'][exp]
     cmap = mip[var]['colormap']
 
+    if not _STRICT and (var_data.shape[0] < tstep + 1):
+        tstep = -1
+
     if "AIS" in ice_sheet:
         fig, ax = plt.subplots(1, 1, figsize=(8, 8), dpi=100)
     else:
-        fig, ax = plt.subplots(1,1, figsize=(5,8), dpi=100)
+        fig, ax = plt.subplots(1, 1, figsize=(5, 8), dpi=100)
     # plt.rc('text', usetex=True)
     plt.rc('font', family='serif')
 
@@ -228,7 +239,8 @@ def check_var_meta(var, nc_var, data_file, meta):
                                      'the final init timestep has not been included as the initial',
                                      'timestep in the follow-on experiments.']
                                     ).format(var, meta['timestep']+1, tsteps, data_file))
-            return (message, None)
+            if _STRICT:
+                return (message, None)
 
     ncattr = var_data.ncattrs()
     if 'standard_name' not in ncattr:
